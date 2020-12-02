@@ -1,0 +1,10 @@
+[user]
+	email = gustavomendes.medeiros@gmail.com
+	name = Gustavo Mendes de Medeiros
+[core]
+  editor = vim
+[alias]
+  st = status
+  co = checkout
+  lg = log --all --graph --decorate --oneline --abbrev-commit
+  d = diff
