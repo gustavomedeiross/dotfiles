@@ -1,4 +1,4 @@
-Config { font = "xft:MesloLGL Nerd Font:pixelsize=12:antialias=true:hinting=true"
+Config { font = "xft:DejaVu Sans Mono Nerd Font:pixelsize=12:antialias=true:hinting=true"
        , bgColor = "#282828"
        , fgColor = "#ebdbb2"
        , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 24 }
