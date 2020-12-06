@@ -1,12 +1,21 @@
 Config { font = "xft:DejaVu Sans Mono Nerd Font:pixelsize=12:antialias=true:hinting=true"
        , bgColor = "#282828"
        , fgColor = "#ebdbb2"
-       , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 24 }
+       , position = Static { xpos = 0 , ypos = 0, width = 1366, height = 24 }
        , lowerOnStart = True
        , iconRoot = "/home/gustavo/.xmonad/xpm/"  -- default: "."
        , commands = [ Run Network "enp3s0" ["-t","a <rx>kb a <tx>kb"] 20
                     , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
                     , Run Memory ["-t","  Mem: <usedratio>%"] 10
+                    , Run Battery [
+                        "-t", " Bat: <left>% - <timeleft>",
+                        "--",
+                        --"-c", "charge_full",
+                        "-O", "AC",
+                        "-o", "Bat",
+                        "-h", "green",
+                        "-l", "red"
+                      ] 10
                      -- Disk space free
                     , Run DiskU [("/", " HDD: <free> free")] [] 60
                     , Run Swap [] 10
@@ -18,6 +27,6 @@ Config { font = "xft:DejaVu Sans Mono Nerd Font:pixelsize=12:antialias=true:hint
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <icon=haskell_20.xpm/> <fc=#666666>|</fc> %StdinReader% }{ <fc=#83a598> %uname% </fc><fc=#666666>| </fc><fc=#458588> %cpu% </fc><fc=#666666>| </fc><fc=#8ec07c>%memory% </fc><fc=#666666>| </fc><fc=#fabd2f>%disku% </fc><fc=#666666>| </fc><fc=#b8bb26>%enp3s0% </fc><fc=#666666>| </fc><fc=#98be65> %pacupdate%</fc><fc=#666666>| </fc><fc=#98be65>%date%</fc>| <fc=#83a598>  </fc>"
+       , template = " <icon=haskell_20.xpm/> <fc=#666666>|</fc> %StdinReader% }{ <fc=#83a598> %uname% </fc><fc=#666666>| </fc><fc=#458588> %cpu% </fc><fc=#666666>| </fc><fc=#8ec07c>%memory% </fc><fc=#666666>| </fc><fc=#8ec07c>%battery% </fc><fc=#666666>| </fc><fc=#fabd2f>%disku% </fc><fc=#666666>| </fc><fc=#b8bb26>%enp3s0% </fc><fc=#666666>| </fc><fc=#98be65> %pacupdate%</fc><fc=#666666>| </fc><fc=#98be65>%date%</fc>| <fc=#83a598>  </fc>"
        }
 
