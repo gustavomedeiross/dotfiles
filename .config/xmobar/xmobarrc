@@ -1,7 +1,7 @@
 Config { font = "xft:DejaVu Sans Mono Nerd Font:pixelsize=12:antialias=true:hinting=true"
        , bgColor = "#282828"
        , fgColor = "#ebdbb2"
-       , position = Static { xpos = 0 , ypos = 0, width = 1366, height = 24 }
+       , position = TopW L 100
        , lowerOnStart = True
        , iconRoot = "/home/gustavo/.xmonad/xpm/"  -- default: "."
        , commands = [ Run Network "enp3s0" ["-t","a <rx>kb a <tx>kb"] 20
