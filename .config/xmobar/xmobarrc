@@ -9,7 +9,7 @@ Config { font = "xft:DejaVu Sans Mono Nerd Font:pixelsize=12:antialias=true:hint
                         "-L", "3",
                         "-H","50",
                         "--normal", "#b8bb26",
-                        "--high", "fb4934"
+                        "--high", "#fb4934"
                       ] 10
                     , Run Memory [
                         "-t",
