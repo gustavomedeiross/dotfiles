@@ -22,7 +22,7 @@ Config { font = "xft:DejaVu Sans Mono Nerd Font:pixelsize=12:antialias=true:hint
                         "--",
                         --"-c", "charge_full",
                         "-O", "",
-                        "-o", "",
+                        "-o", "",
                         "-i", "",
                         "-h", "#b8bb26",
                         "-l", "#fb4934"
