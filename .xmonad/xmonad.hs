@@ -262,8 +262,20 @@ myStartupHook = do
 --
 --  xmonad =<< xmobar defaults
 main = do
-  xmproc <- spawnPipe "xmobar & /home/gustavo/.config/xmobar/xmobarrc"
-  xmonad =<< xmobar (ewmh $ defaults)
+  xmproc <- spawnPipe "xmobar /home/gustavo/.config/xmobar/xmobarrc"
+  xmonad $ ewmh $ docks $ defaults {
+    logHook = dynamicLogWithPP $ xmobarPP {
+      ppOutput = hPutStrLn xmproc,
+      ppVisible = xmobarColor "#ffffff" "",
+      ppTitle = xmobarColor "#d5c4a1" "",
+      ppCurrent = xmobarColor "#458588" "" . wrap "[" "]",
+      ppHidden = xmobarColor "#d5c4a1" "",
+      ppLayout = xmobarColor "#d5c4a1" "",
+      ppUrgent = xmobarColor "#cc241d" "" . wrap "[" "]"
+    },
+    manageHook = manageDocks <+> myManageHook,
+    startupHook = myStartupHook
+  }
 
 
 
