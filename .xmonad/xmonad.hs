@@ -137,6 +137,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+
+    -- mod + a => changes keyboard layout
+    , ((modm              , xK_a     ), spawn "/home/gustavo/.local/bin/switch-keyboard.sh")
     ]
     ++
 

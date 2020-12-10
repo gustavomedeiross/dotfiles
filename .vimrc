@@ -100,7 +100,7 @@ endif
 
 " --- fzf ---
 "fzf mapping to Ctrl + P
-nnoremap <silent> <C-p> :GFiles<CR>
+nnoremap <silent> <C-p> :Files<CR>
 
 
 " --- NERDCommenter ---
