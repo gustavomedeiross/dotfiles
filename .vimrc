@@ -69,7 +69,7 @@ Plug 'mbbill/undotree'
 Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'elixir-editors/vim-elixir'
-Plug 'jwalton512/vim-blade'
+Plug 'vim-crystal/vim-crystal'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'jparise/vim-graphql'
 Plug 'pantharshit00/vim-prisma'
@@ -117,12 +117,14 @@ let g:NERDCompactSexyComs = 1
 let g:coc_global_extensions = [
   \ 'coc-pairs',
   \ 'coc-tsserver',
-  \ 'coc-go',
   \ 'coc-json', 
   \ 'coc-snippets',
   \ 'coc-html', 
   \ 'coc-css', 
   \ 'coc-elixir', 
+  \ 'coc-solargraph', 
+  \ 'coc-go',
+  \ 'coc-clangd',
   \ 'coc-phpls', 
   \ ]
 

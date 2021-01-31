@@ -8,3 +8,7 @@
   co = checkout
   lg = log --all --graph --decorate --oneline --abbrev-commit
   d = diff
+[oh-my-zsh]
+	hide-dirty = 1
+[init]
+	defaultBranch = master

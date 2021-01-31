@@ -10,6 +10,8 @@ plugins=(
     asdf
 )
 
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
 source $ZSH/oh-my-zsh.sh
 
 # Green Lambda prompt
