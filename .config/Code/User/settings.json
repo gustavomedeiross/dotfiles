@@ -1,0 +1,80 @@
+{
+    //Styles and Font Size of the editor (General)
+    "workbench.iconTheme": "material-icon-theme",
+    // "workbench.colorTheme": "One Dark Pro",
+    "editor.fontSize": 12,
+    "terminal.integrated.fontSize": 12,
+    "window.titleBarStyle": "custom",
+    "editor.tabSize": 2,
+    "editor.cursorStyle": "block",
+    "editor.acceptSuggestionOnEnter": "off",
+    "explorer.compactFolders": false,
+    "workbench.colorCustomizations": {
+      "editorCursor.foreground": "#99989A"
+    },
+    //General Editor Behaviors
+    "html.autoClosingTags": false,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "explorer.confirmDragAndDrop": false,
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    // "javascript.suggest.autoImports": false,
+    // "typescript.suggest.autoImports": false,
+    //Emmet
+    "emmet.syntaxProfiles": {
+      "javascript": "jsx",
+      "typescript": "tsx"
+    },
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact",
+      "typescript": "typescriptreact"
+    },
+    //ESLint & Prettier
+    "editor.formatOnSave": true,
+    "[elixir]": {
+      "editor.formatOnSave": false
+    },
+    "[typescript]": {
+      "editor.formatOnSave": false
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.rulers": [80, 120],
+    // "editor.parameterHints.enabled": false, //Parameter Hints
+    //ESLint
+    "eslint.validate": ["javascript", "typescript"],
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    // === VIM ===
+    "vim.handleKeys": {
+      "<C-b>": false,
+      "<C-p>": false,
+      "<C-a>": false
+    },
+    "vim.insertModeKeyBindings": [
+      {
+        "before": ["j", "k"],
+        "after": ["<esc>"]
+      }
+    ],
+    "dart.debugExternalLibraries": true,
+    "dart.debugSdkLibraries": true,
+    "stories.username": "guan_copper",
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "[dart]": {
+      "editor.formatOnSave": true,
+      "editor.formatOnType": true,
+      "editor.rulers": [
+        80
+      ],
+      "editor.selectionHighlight": false,
+      "editor.suggest.snippetsPreventQuickSuggestions": false,
+      "editor.suggestSelection": "first",
+      "editor.tabCompletion": "onlySnippets",
+      "editor.wordBasedSuggestions": false
+    },
+    "window.zoomLevel": 0
+  }
