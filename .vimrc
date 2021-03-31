@@ -28,10 +28,18 @@ set shiftwidth=2
 set colorcolumn=100
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
+" fix vim's underline not showing when using tmux
+if exists('$TMUX')
+  let &t_Cs = ''
+  let &t_Ce = ''
+endif
+
 " change spacing for language specific
 autocmd Filetype php setlocal ts=4 sts=4 sw=4
 
 " ===== KEYBINDINGS =====
+"
+:command Henke set norelativenumber
 
 inoremap jk <ESC>
 let mapleader = "\<Space>"
@@ -88,6 +96,9 @@ set background=dark
 let g:gruvbox_contrast_dark = 'hard'
 
 colorscheme gruvbox
+
+" for trasparent background
+hi Normal guibg=NONE ctermbg=NONE
 
 " --- vim-airline ---
 "let g:airline_powerline_fonts = 1
