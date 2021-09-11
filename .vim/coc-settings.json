@@ -11,6 +11,16 @@
       "trace.server": "verbose",
       "initializationOptions": {
       }
+    },
+    "racket": {
+      "command": "racket",
+      "args": [
+        "--lib",
+        "racket-langserver"
+      ],
+      "filetypes": [
+        "scheme"
+      ]
     }
   }
 }
