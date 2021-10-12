@@ -83,3 +83,8 @@ source <(kubectl completion zsh)
 # Voltbras 
 source $HOME/.voltbras.sh
 
+# Racket
+export PATH="$PATH:/usr/racket/bin"
+
+# OCaml
+eval `opam env`
