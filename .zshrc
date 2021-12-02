@@ -88,3 +88,4 @@ export PATH="$PATH:/usr/racket/bin"
 
 # OCaml
 eval `opam env`
+[ -f "/home/gustavo/.ghcup/env" ] && source "/home/gustavo/.ghcup/env" # ghcup-env
