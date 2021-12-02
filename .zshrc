@@ -60,6 +60,9 @@ bindkey -M viins 'jk' vi-cmd-mode
 # alias for managing my dotfiles with a git bare repository 
 alias dotfiles='/usr/bin/git --git-dir=/home/gustavo/.dotfiles/ --work-tree=/home/gustavo'
 
+# Add local scripts to PATH
+export PATH="$PATH:$HOME/.local/bin"
+
 # kubecfg
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
