@@ -50,11 +50,31 @@
   :init
   (vertico-mode))
 
-;; (use-package general
-;;   :config
-;;   (general-create-definer gu/leader-keys
-;;     :prefix "SPC"
-;;     global-prefix)
+(use-package general
+  :config
+  (general-create-definer leader-keys
+    :keymaps '(normal visual emacs)
+    :prefix "SPC")
+  (leader-keys
+    "," '(switch-to-buffer :which-key "Switch to buffer")
+    "." '(find-file :which-key "Find file"))
+
+  (general-create-definer tmux-keys
+    :keymaps '(normal visual emacs)
+    :prefix "C-a")
+  (tmux-keys
+    "%" '(split-window-horizontally :which-key "Horizontal split")
+    "\"" '(split-window-vertically :which-key "Vertical split")
+    "x y" '(delete-window :which-key "Delete window"))
+
+  ; Vi keybindings to navigate between splits
+  (general-define-key
+    :keymaps '(normal emacs)
+    "C-h" '(windmove-left :which-key "Move to left window")
+    "C-j" '(windmove-down :which-key "Move to lower window")
+    "C-k" '(windmove-up :which-key "Move to upper window")
+    "C-l" '(windmove-right :which-key "Move to right window"))
+  )
 
 (use-package eyebrowse
   :config
