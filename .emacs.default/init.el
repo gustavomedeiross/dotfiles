@@ -50,6 +50,16 @@
   :init
   (vertico-mode))
 
+;; Add vim keybindings to vertico
+;; TODO: put this inside "use-package" somehow
+(eval-after-load 'vertico
+  '(general-define-key :keymaps '(vertico-map)
+    "C-J"      #'vertico-next-group
+    "C-K"      #'vertico-previous-group
+    "C-j"      #'vertico-next
+    "C-k"      #'vertico-previous))
+
+
 (use-package general
   :config
   (general-create-definer leader-keys
