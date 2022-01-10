@@ -50,7 +50,3 @@
 ;(unpin! t)
 
 (package! eyebrowse)
-
-;; Haskell
-;; (package! haskell-mode)
-;; (package! lsp-haskell)

@@ -75,6 +75,7 @@
   (tmux-keys
     "%" '(split-window-horizontally :which-key "Horizontal split")
     "\"" '(split-window-vertically :which-key "Vertical split")
+    "c" '(eyebrowse-create-window-config :which-key "Create window config")
     "x y" '(delete-window :which-key "Delete window"))
 
   ; Vi keybindings to navigate between splits
