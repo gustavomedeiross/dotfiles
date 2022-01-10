@@ -37,6 +37,20 @@
 
 ;; Package specifics
 
+(winner-mode 1)
+(defvar window-zoomed? nil)
+(defun toggle-window-zoom ()
+  "Toggles the window zoom on the current selected window"
+  (interactive)
+  (if window-zoomed?
+      (progn
+        (setq window-zoomed? nil)
+        (winner-undo))
+    (progn
+      (setq window-zoomed? t)
+      (delete-other-windows))))
+
+
 (use-package command-log-mode)
 
 (use-package which-key
@@ -59,7 +73,6 @@
     "C-j"      #'vertico-next
     "C-k"      #'vertico-previous))
 
-
 (use-package general
   :config
   (general-create-definer leader-keys
@@ -67,7 +80,8 @@
     :prefix "SPC")
   (leader-keys
     "," '(switch-to-buffer :which-key "Switch to buffer")
-    "." '(find-file :which-key "Find file"))
+    "." '(find-file :which-key "Find file")
+    "w" '(eyebrowse-switch-to-window-config :which-key "Switch to window config"))
 
   (general-create-definer tmux-keys
     :keymaps '(normal visual emacs)
@@ -76,7 +90,13 @@
     "%" '(split-window-horizontally :which-key "Horizontal split")
     "\"" '(split-window-vertically :which-key "Vertical split")
     "c" '(eyebrowse-create-window-config :which-key "Create window config")
-    "x y" '(delete-window :which-key "Delete window"))
+    "x y" '(delete-window :which-key "Delete window")
+    "z" '(toggle-window-zoom :which-key "Zoom window in"))
+
+  ;; TODO: I don't really know which key to use
+  (general-define-key
+    :keymaps '(normal insert visual emacs)
+    "M-," '(eyebrowse-switch-to-window-config :which-key "Switch to window config"))
 
   ; Vi keybindings to navigate between splits
   (general-define-key
