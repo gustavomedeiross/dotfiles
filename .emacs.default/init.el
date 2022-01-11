@@ -73,6 +73,16 @@
     "C-j"      #'vertico-next
     "C-k"      #'vertico-previous))
 
+(defun split-window-vertically-with-focus ()
+  (interactive)
+  (split-window-vertically)
+  (other-window 1))
+
+(defun split-window-horizontally-with-focus ()
+  (interactive)
+  (split-window-horizontally)
+  (other-window 1))
+
 (use-package general
   :config
   (general-create-definer leader-keys
@@ -81,14 +91,23 @@
   (leader-keys
     "," '(switch-to-buffer :which-key "Switch to buffer")
     "." '(find-file :which-key "Find file")
-    "w" '(eyebrowse-switch-to-window-config :which-key "Switch to window config"))
+    ;; Window
+    "w s" '(split-window-horizontally :which-key "Horizontal split")
+    "w v" '(split-window-vertically :which-key "Vertical split")
+    "w c" '(delete-window :which-key "Close window")
+    "w z" '(toggle-window-zoom :which-key "Toggle window zoom")
+    "w h" '(windmove-left :which-key "Move to left window")
+    "w j" '(windmove-down :which-key "Move to lower window")
+    "w k" '(windmove-up :which-key "Move to upper window")
+    "w l" '(windmove-right :which-key "Move to right window"))
 
   (general-create-definer tmux-keys
     :keymaps '(normal visual emacs)
     :prefix "C-a")
   (tmux-keys
-    "%" '(split-window-horizontally :which-key "Horizontal split")
-    "\"" '(split-window-vertically :which-key "Vertical split")
+    "%" '(split-window-horizontally-with-focus :which-key "Horizontal split")
+    "\"" '(split-window-vertically-with-focus :which-key "Vertical split")
+    ;; TODO: create with empty buffer
     "c" '(eyebrowse-create-window-config :which-key "Create window config")
     "x y" '(delete-window :which-key "Delete window")
     "z" '(toggle-window-zoom :which-key "Zoom window in"))
