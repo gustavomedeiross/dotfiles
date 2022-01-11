@@ -35,6 +35,8 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(setq custom-file (concat user-emacs-directory "/custom.el"))
+
 ;; Package specifics
 
 (winner-mode 1)
@@ -86,7 +88,8 @@
 (use-package general
   :config
   (general-create-definer leader-keys
-    :keymaps '(normal visual emacs)
+    :states 'normal
+    :keymaps '(normal visual emacs override)
     :prefix "SPC")
   (leader-keys
     "," '(switch-to-buffer :which-key "Switch to buffer")
@@ -158,4 +161,14 @@
   :config
   (evil-escape-mode))
 
-(setq custom-file (concat user-emacs-directory "/custom.el"))
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :config
+  (lsp-enable-which-key-integration t))
+
+(use-package lsp-haskell)
+
+(use-package haskell-mode
+  :init
+  (add-hook 'haskell-mode-hook #'lsp)
+  (add-hook 'haskell-literate-mode-hook #'lsp))
