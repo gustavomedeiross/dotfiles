@@ -1,5 +1,5 @@
-(setq inhibit-startup-message t)
-
+(setq inhibit-startup-message t) ; Remove welcome screen
+(setq make-backup-files nil) ; Disable backup~ files
 (setq ring-bell-function 'ignore) ; Disable beeps
 (scroll-bar-mode -1) ; Disable visible scrollbar
 (tool-bar-mode -1) ; Disable the toolbar
@@ -195,3 +195,6 @@
   :init
   (add-hook 'haskell-mode-hook #'lsp)
   (add-hook 'haskell-literate-mode-hook #'lsp))
+
+;; OCaml
+(use-package tuareg)
