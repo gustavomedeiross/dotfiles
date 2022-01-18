@@ -7,7 +7,7 @@
 (set-fringe-mode 10) ; Give some breathing room
 (menu-bar-mode -1) ; Disable the menu bar
 
-(load-theme 'wombat)
+(load-theme 'doom-gruvbox t)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -54,6 +54,8 @@
 
 
 (use-package command-log-mode)
+
+(use-package doom-themes)
 
 (use-package which-key
   :init (which-key-mode)
@@ -120,6 +122,11 @@
     :keymaps '(normal insert visual emacs)
     "M-," '(eyebrowse-switch-to-window-config :which-key "Switch to window config"))
 
+  (general-define-key
+    :states 'normal
+    :keymaps '(normal override)
+    "K" '(lsp-ui-doc-glance :which-key "Show module docs"))
+
   ; Vi keybindings to navigate between splits
   (general-define-key
     :keymaps '(normal emacs)
@@ -165,6 +172,22 @@
   :commands (lsp lsp-deferred)
   :config
   (lsp-enable-which-key-integration t))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'at-point)
+  (lsp-ui-doc-enable nil))
+
+(use-package company
+  :after lsp-mode
+  :hook (prog-mode . company-mode)
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
 (use-package lsp-haskell)
 
