@@ -83,9 +83,6 @@ export PATH="$PATH:$HOME/flutter/bin"
 # gcloud
 source <(kubectl completion zsh)
 
-# Voltbras 
-source $HOME/.voltbras.sh
-
 # Racket
 export PATH="$PATH:/usr/racket/bin"
 
