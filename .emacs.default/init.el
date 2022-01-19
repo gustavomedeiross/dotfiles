@@ -79,12 +79,12 @@
 
 (defun split-window-vertically-with-focus ()
   (interactive)
-  (split-window-vertically)
+  (evil-window-vsplit)
   (other-window 1))
 
 (defun split-window-horizontally-with-focus ()
   (interactive)
-  (split-window-horizontally)
+  (evil-window-split)
   (other-window 1))
 
 (use-package general
@@ -97,9 +97,10 @@
     "," '(switch-to-buffer :which-key "Switch to buffer")
     "." '(find-file :which-key "Find file")
     ;; Window
-    "w s" '(split-window-horizontally :which-key "Horizontal split")
-    "w v" '(split-window-vertically :which-key "Vertical split")
-    "w c" '(delete-window :which-key "Close window")
+    "w s" '(evil-window-split :which-key "Horizontal split")
+    "w v" '(evil-window-vsplit :which-key "Vertical split")
+    "w c" '(evil-window-delete :which-key "Close window")
+    "w q" '(evil-quit :which-key "Quit window")
     "w z" '(toggle-window-zoom :which-key "Toggle window zoom")
     "w h" '(windmove-left :which-key "Move to left window")
     "w j" '(windmove-down :which-key "Move to lower window")
@@ -115,7 +116,7 @@
     ;; TODO: create with empty buffer
     "c" '(eyebrowse-create-window-config :which-key "Create window config")
     "x y" '(delete-window :which-key "Delete window")
-    "z" '(toggle-window-zoom :which-key "Zoom window in"))
+    "z" '(toggle-window-zoom :which-key "Toggle window zoom"))
 
   ;; TODO: I don't really know which key to use
   (general-define-key
@@ -154,7 +155,8 @@
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  (setq evil-insert-state-cursor 'box))
 
 (use-package evil-collection
   :after evil
