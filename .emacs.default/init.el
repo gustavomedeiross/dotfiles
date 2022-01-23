@@ -111,8 +111,8 @@
     :keymaps '(normal visual emacs)
     :prefix "C-a")
   (tmux-keys
-    "%" '(split-window-horizontally-with-focus :which-key "Horizontal split")
-    "\"" '(split-window-vertically-with-focus :which-key "Vertical split")
+    "%" '(split-window-vertically-with-focus :which-key "Horizontal split")
+    "\"" '(split-window-horizontally-with-focus :which-key "Vertical split")
     ;; TODO: create with empty buffer
     "c" '(eyebrowse-create-window-config :which-key "Create window config")
     "x y" '(delete-window :which-key "Delete window")
@@ -168,7 +168,34 @@
   :init
   (setq-default evil-escape-key-sequence "jk")
   :config
-  (evil-escape-mode))
+  (evil-escape-mode)
+  (setq evil-escape-excluded-major-modes '(vterm-mode)))
+
+(defun configure-eshell ()
+  ;; Save command history when commands are entered
+  (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+
+  ;; Truncate buffer for performance
+  (add-hook 'eshell-output-filter-functions 'eshell-truncate-buffer)
+
+  ;; Useful keys
+  (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
+  (evil-define-key '(normal insert visual) eshell-mode-map (kbd "<home>") 'esh-bol)
+  (evil-normalize-keymaps)
+
+  (setq eshell-history-size         10_000
+	eshell-buffer-maximum-lines 10_000
+	eshell-hist-ignoredups t
+	eshell-scroll-to-bottom-on-input t))
+
+(use-package eshell
+  :hook (eshell-first-time-mode . configure-eshell))
+
+(use-package vterm
+  :commands vterm
+  :config
+  (setq vterm-shell "zsh")
+  (setq vterm-max-scrollback 10000))
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
