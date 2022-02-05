@@ -7,8 +7,6 @@
 (set-fringe-mode 10) ; Give some breathing room
 (menu-bar-mode -1) ; Disable the menu bar
 
-(load-theme 'doom-gruvbox t)
-
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -39,6 +37,11 @@
 
 ;; Package specifics
 
+
+(use-package doom-themes
+  :config
+  (load-theme 'doom-gruvbox t))
+
 (winner-mode 1)
 (defvar window-zoomed? nil)
 (defun toggle-window-zoom ()
@@ -67,15 +70,6 @@
 (use-package vertico
   :init
   (vertico-mode))
-
-;; Add vim keybindings to vertico
-;; TODO: put this inside "use-package" somehow
-(eval-after-load 'vertico
-  '(general-define-key :keymaps '(vertico-map)
-    "C-J"      #'vertico-next-group
-    "C-K"      #'vertico-previous-group
-    "C-j"      #'vertico-next
-    "C-k"      #'vertico-previous))
 
 (defun split-window-vertically-with-focus ()
   (interactive)
@@ -134,8 +128,16 @@
     "C-h" '(windmove-left :which-key "Move to left window")
     "C-j" '(windmove-down :which-key "Move to lower window")
     "C-k" '(windmove-up :which-key "Move to upper window")
-    "C-l" '(windmove-right :which-key "Move to right window"))
-  )
+    "C-l" '(windmove-right :which-key "Move to right window")))
+
+;; Add vim keybindings to vertico
+;; TODO: put this inside "use-package" somehow
+(eval-after-load 'vertico
+  '(general-define-key :keymaps '(vertico-map)
+    "C-J"      #'vertico-next-group
+    "C-K"      #'vertico-previous-group
+    "C-j"      #'vertico-next
+    "C-k"      #'vertico-previous))
 
 (use-package eyebrowse
   :config
@@ -206,7 +208,13 @@
   :hook (lsp-mode . lsp-ui-mode)
   :custom
   (lsp-ui-doc-position 'at-point)
-  (lsp-ui-doc-enable nil))
+  (lsp-ui-doc-enable nil)
+  (lsp-headerline-breadcrumb-enable nil)
+  (lsp-ui-sideline-enable nil)
+  (lsp-modeline-code-actions-enable nil)
+  (lsp-eldoc-enable-hover nil)
+  (lsp-modeline-diagnostics-enable nil)
+  (lsp-signature-auto-activate nil))
 
 (use-package company
   :after lsp-mode
@@ -218,6 +226,15 @@
 (use-package company-box
   :hook (company-mode . company-box-mode))
 
+(use-package flycheck
+  :config
+  (global-flycheck-mode))
+
+(use-package flycheck-posframe
+  :after flycheck
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+
 (use-package lsp-haskell)
 
 (use-package haskell-mode
@@ -227,3 +244,11 @@
 
 ;; OCaml
 (use-package tuareg)
+;; (use-package lsp-ocaml)
+
+;; TypeScript
+(use-package typescript-mode
+  :mode "\\.ts\\'"
+  :hook (typescript-mode . lsp-deferred)
+  :config
+  (setq typescript-indent-level 2))
