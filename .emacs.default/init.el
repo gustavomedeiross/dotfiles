@@ -1,3 +1,12 @@
+;; TODO: add doom-like tabs to perspective.el
+;; TODO: add >> or << support in visual mode
+;; TODO: add evil-modej C-r support
+;; TODO: add support for minibuffer (e.g. run-haskell)
+;; TODO: remove line numbers from vterm/eshell
+;; TODO: remove mouse hover on suggestions lsp and/or company mode
+;; TODO: remove checkers below modeline on mouse hover (lsp and/or flycheck)
+
+
 (setq inhibit-startup-message t) ; Remove welcome screen
 (setq make-backup-files nil) ; Disable backup~ files
 (setq ring-bell-function 'ignore) ; Disable beeps
