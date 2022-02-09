@@ -107,15 +107,8 @@
   (tmux-keys
     "%" '(split-window-vertically-with-focus :which-key "Horizontal split")
     "\"" '(split-window-horizontally-with-focus :which-key "Vertical split")
-    ;; TODO: create with empty buffer
-    "c" '(eyebrowse-create-window-config :which-key "Create window config")
     "x y" '(delete-window :which-key "Delete window")
     "z" '(toggle-window-zoom :which-key "Toggle window zoom"))
-
-  ;; TODO: I don't really know which key to use
-  (general-define-key
-    :keymaps '(normal insert visual emacs)
-    "M-," '(eyebrowse-switch-to-window-config :which-key "Switch to window config"))
 
   (general-define-key
     :states 'normal
@@ -139,10 +132,9 @@
     "C-j"      #'vertico-next
     "C-k"      #'vertico-previous))
 
-(use-package eyebrowse
-  :config
-  (eyebrowse-mode t)
-  (eyebrowse-setup-opinionated-keys))
+(use-package perspective
+  :init
+  (persp-mode))
 
 ;; UI improvements
 (use-package all-the-icons
