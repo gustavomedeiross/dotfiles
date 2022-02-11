@@ -1,10 +1,10 @@
 ;; TODO: add doom-like tabs to perspective.el
 ;; TODO: add >> or << support in visual mode
-;; TODO: add evil-modej C-r support
 ;; TODO: add support for minibuffer (e.g. run-haskell)
 ;; TODO: remove line numbers from vterm/eshell
 ;; TODO: remove mouse hover on suggestions lsp and/or company mode
 ;; TODO: remove checkers below modeline on mouse hover (lsp and/or flycheck)
+;; TODO: stop saving #file.ext#
 
 
 (setq inhibit-startup-message t) ; Remove welcome screen
@@ -45,7 +45,6 @@
 (setq custom-file (concat user-emacs-directory "/custom.el"))
 
 ;; Package specifics
-
 
 (use-package doom-themes
   :config
@@ -143,7 +142,11 @@
 
 (use-package perspective
   :init
-  (persp-mode))
+  (persp-mode)
+  :custom
+  (persp-sort 'created))
+
+(load-file "~/.emacs.default/workspaces.el")
 
 ;; UI improvements
 (use-package all-the-icons
@@ -152,18 +155,24 @@
 (use-package doom-modeline
  :init (doom-modeline-mode 1))
 
+(use-package undo-tree
+  :init
+  (global-undo-tree-mode 1)
+  :config
+  (setq undo-tree-auto-save-history nil))
+
 ;; Evil Mode
 (use-package evil
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-tree)
   :config
   (evil-mode 1)
   (setq evil-insert-state-cursor 'box))
 
 (use-package evil-collection
   :after evil
-  :ensure t
   :config
   (evil-collection-init))
 
