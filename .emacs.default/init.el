@@ -4,7 +4,9 @@
 ;; TODO: remove line numbers from vterm/eshell
 ;; TODO: remove mouse hover on suggestions lsp and/or company mode
 ;; TODO: remove checkers below modeline on mouse hover (lsp and/or flycheck)
+;; TODO: add commenter
 ;; TODO: stop saving #file.ext#
+;; TODO: hide special buffers in buffer-list
 
 
 (setq inhibit-startup-message t) ; Remove welcome screen
@@ -148,18 +150,29 @@
 
 (load-file "~/.emacs.default/workspaces.el")
 
-;; UI improvements
+;; UI
+
 (use-package all-the-icons
   :if (display-graphic-p))
 
 (use-package doom-modeline
  :init (doom-modeline-mode 1))
 
-(use-package undo-tree
+(use-package popper
+  :bind (("C-`"   . popper-toggle-latest)
+         ("M-`"   . popper-cycle)
+         ("C-M-`" . popper-toggle-type))
   :init
-  (global-undo-tree-mode 1)
-  :config
-  (setq undo-tree-auto-save-history nil))
+  (setq popper-reference-buffers
+	'("\\*Messages\\*"
+	"Output\\*$"
+	"\\*Async Shell Command\\*"
+	help-mode
+	compilation-mode
+	inferior-haskell-mode
+	vterm-mode))
+  (popper-mode +1)
+  (popper-echo-mode +1))                ; For echo area hints
 
 ;; Evil Mode
 (use-package evil
@@ -183,6 +196,13 @@
   (evil-escape-mode)
   (setq evil-escape-excluded-major-modes '(vterm-mode)))
 
+(use-package undo-tree
+  :init
+  (global-undo-tree-mode 1)
+  :config
+  (setq undo-tree-auto-save-history nil))
+
+;; Shell
 (defun configure-eshell ()
   ;; Save command history when commands are entered
   (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
@@ -208,6 +228,8 @@
   :config
   (setq vterm-shell "zsh")
   (setq vterm-max-scrollback 10000))
+
+;; LSP & Auto-completion
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
