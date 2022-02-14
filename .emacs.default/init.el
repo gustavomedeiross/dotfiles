@@ -1,12 +1,12 @@
 ;; TODO: add doom-like tabs to perspective.el
 ;; TODO: add >> or << support in visual mode
-;; TODO: add support for minibuffer (e.g. run-haskell)
 ;; TODO: remove line numbers from vterm/eshell
 ;; TODO: remove mouse hover on suggestions lsp and/or company mode
 ;; TODO: remove checkers below modeline on mouse hover (lsp and/or flycheck)
 ;; TODO: add commenter
 ;; TODO: stop saving #file.ext#
 ;; TODO: hide special buffers in buffer-list
+;; TODO: improve pop-up experience (vterm, vertico, which-key conflicts, etc.)
 
 
 (setq inhibit-startup-message t) ; Remove welcome screen
@@ -102,14 +102,33 @@
     "." '(find-file :which-key "Find file")
     ;; Window
     "w s" '(evil-window-split :which-key "Horizontal split")
+    "w S" '(split-window-horizontally-with-focus :which-key "Horizontal split with focus")
     "w v" '(evil-window-vsplit :which-key "Vertical split")
+    "w V" '(split-window-vertically-with-focus :which-key "Vertical split with focus")
     "w c" '(evil-window-delete :which-key "Close window")
     "w q" '(evil-quit :which-key "Quit window")
     "w z" '(toggle-window-zoom :which-key "Toggle window zoom")
     "w h" '(windmove-left :which-key "Move to left window")
     "w j" '(windmove-down :which-key "Move to lower window")
     "w k" '(windmove-up :which-key "Move to upper window")
-    "w l" '(windmove-right :which-key "Move to right window"))
+    "w l" '(windmove-right :which-key "Move to right window")
+
+    ;; Workspaces
+    "TAB n" '(persp-switch :which-key "New workspace")
+    "TAB ." '(persp-switch :which-key "Switch to a workspace")
+    "TAB c" '(persp-switch :which-key "Create or switch to a workspace")
+    "TAB r" '(persp-rename :which-key "Rename workspace")
+    "TAB [" '(persp-prev :which-key "Previous workspace")
+    "TAB ]" '(persp-next :which-key "Next workspace")
+    "TAB 1" '(+workspace/switch-to-0 :which-key "Switch to 1st workspace")
+    "TAB 2" '(+workspace/switch-to-1 :which-key "Switch to 2st workspace")
+    "TAB 3" '(+workspace/switch-to-2 :which-key "Switch to 3rd workspace")
+    "TAB 4" '(+workspace/switch-to-3 :which-key "Switch to 4th workspace")
+    "TAB 5" '(+workspace/switch-to-4 :which-key "Switch to 5th workspace")
+    "TAB 6" '(+workspace/switch-to-5 :which-key "Switch to 6th workspace")
+    "TAB 7" '(+workspace/switch-to-6 :which-key "Switch to 7th workspace")
+    "TAB 8" '(+workspace/switch-to-7 :which-key "Switch to 8th workspace")
+    "TAB 9" '(+workspace/switch-to-8 :which-key "Switch to 9th workspace"))
 
   (general-create-definer tmux-keys
     :keymaps '(normal visual emacs)
