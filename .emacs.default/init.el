@@ -1,6 +1,5 @@
 ;; TODO: add doom-like tabs to perspective.el
 ;; TODO: add >> or << support in visual mode
-;; TODO: remove line numbers from vterm/eshell
 ;; TODO: remove mouse hover on suggestions lsp and/or company mode
 ;; TODO: remove checkers below modeline on mouse hover (lsp and/or flycheck)
 ;; TODO: add commenter
@@ -222,31 +221,28 @@
   (setq undo-tree-auto-save-history nil))
 
 ;; Shell
-(defun configure-eshell ()
-  ;; Save command history when commands are entered
-  (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
-
-  ;; Truncate buffer for performance
-  (add-hook 'eshell-output-filter-functions 'eshell-truncate-buffer)
-
-  ;; Useful keys
-  (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
-  (evil-define-key '(normal insert visual) eshell-mode-map (kbd "<home>") 'esh-bol)
-  (evil-normalize-keymaps)
-
-  (setq eshell-history-size         10_000
-	eshell-buffer-maximum-lines 10_000
-	eshell-hist-ignoredups t
-	eshell-scroll-to-bottom-on-input t))
 
 (use-package eshell
-  :hook (eshell-first-time-mode . configure-eshell))
+  :hook
+  (eshell-mode . (lambda () (display-line-numbers-mode 0)))
+  ;; Truncate buffer for performance
+  (eshell-output-filter-functions . eshell-truncate-buffer)
+  ;; Save command history when commands are entered
+  (eshell-pre-command-hook . eshell-save-some-history)
+  :config
+  (setq eshell-history-size 10000
+	eshell-buffer-maximum-lines 10000
+	eshell-hist-ignoredups t
+	eshell-scroll-to-bottom-on-input t)
+  (evil-normalize-keymaps))
 
 (use-package vterm
   :commands vterm
+  :hook (vterm-mode . (lambda () (display-line-numbers-mode 0)))
   :config
   (setq vterm-shell "zsh")
   (setq vterm-max-scrollback 10000))
+
 
 ;; LSP & Auto-completion
 
