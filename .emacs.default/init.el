@@ -1,4 +1,3 @@
-;; TODO: add doom-like tabs to perspective.el
 ;; TODO: add >> or << support in visual mode
 ;; TODO: remove mouse hover on suggestions lsp and/or company mode
 ;; TODO: remove checkers below modeline on mouse hover (lsp and/or flycheck)
@@ -6,6 +5,10 @@
 ;; TODO: stop saving #file.ext#
 ;; TODO: hide special buffers in buffer-list
 ;; TODO: improve pop-up experience (vterm, vertico, which-key conflicts, etc.)
+;; TODO: improve +workspaces ux (display after changes, add +workspace/new without naming, etc.)
+;; TODO: add projectile.el
+;; TODO: add magit
+;; TODO: add org-mode
 
 
 (setq inhibit-startup-message t) ; Remove welcome screen
