@@ -6,6 +6,7 @@
 ;; TODO: hide special buffers in buffer-list
 ;; TODO: improve pop-up experience (vterm, vertico, which-key conflicts, etc.)
 ;; TODO: improve +workspaces ux (display after changes, add +workspace/new without naming, etc.)
+;; TODO: simplify modeline (remove perspectives & POPUP)
 ;; TODO: add projectile.el
 ;; TODO: add magit
 ;; TODO: add org-mode
