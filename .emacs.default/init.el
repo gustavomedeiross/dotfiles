@@ -1,12 +1,13 @@
-;; TODO: add >> or << support in visual mode
+; TODO: add >> or << support in visual mode
 ;; TODO: remove mouse hover on suggestions lsp and/or company mode
 ;; TODO: remove checkers below modeline on mouse hover (lsp and/or flycheck)
-;; TODO: add commenter
 ;; TODO: stop saving #file.ext#
 ;; TODO: hide special buffers in buffer-list
 ;; TODO: improve pop-up experience (vterm, vertico, which-key conflicts, etc.)
 ;; TODO: improve +workspaces ux (display after changes, add +workspace/new without naming, etc.)
 ;; TODO: simplify modeline (remove perspectives & POPUP)
+;; TODO: make C-c and C-r "instantaneous" in vterm & eshell
+;; TODO: fuzzy-find files & text (ripgrep)
 ;; TODO: add projectile.el
 ;; TODO: add magit
 ;; TODO: add org-mode
@@ -56,18 +57,6 @@
   (load-theme 'doom-gruvbox t))
 
 (winner-mode 1)
-(defvar window-zoomed? nil)
-(defun toggle-window-zoom ()
-  "Toggles the window zoom on the current selected window"
-  (interactive)
-  (if window-zoomed?
-      (progn
-        (setq window-zoomed? nil)
-        (winner-undo))
-    (progn
-      (setq window-zoomed? t)
-      (delete-other-windows))))
-
 
 (use-package command-log-mode)
 
@@ -110,7 +99,7 @@
     "w V" '(split-window-vertically-with-focus :which-key "Vertical split with focus")
     "w c" '(evil-window-delete :which-key "Close window")
     "w q" '(evil-quit :which-key "Quit window")
-    "w z" '(toggle-window-zoom :which-key "Toggle window zoom")
+    "w z" '(zoom-window-zoom :which-key "Toggle window zoom")
     "w h" '(windmove-left :which-key "Move to left window")
     "w j" '(windmove-down :which-key "Move to lower window")
     "w k" '(windmove-up :which-key "Move to upper window")
@@ -140,12 +129,16 @@
     "%" '(split-window-vertically-with-focus :which-key "Horizontal split")
     "\"" '(split-window-horizontally-with-focus :which-key "Vertical split")
     "x y" '(delete-window :which-key "Delete window")
-    "z" '(toggle-window-zoom :which-key "Toggle window zoom"))
+    "z" '(zoom-window-zoom :which-key "Toggle window zoom"))
 
   (general-define-key
     :states 'normal
     :keymaps '(normal override)
     "K" '(lsp-ui-doc-glance :which-key "Show module docs"))
+
+  (general-define-key
+    :keymaps '(normal visual)
+    "C-/" '(comment-or-uncomment-region :which-key "Comment or uncomment region"))
 
   ; Vi keybindings to navigate between splits
   (general-define-key
@@ -194,7 +187,10 @@
 	inferior-haskell-mode
 	vterm-mode))
   (popper-mode +1)
-  (popper-echo-mode +1))                ; For echo area hints
+  (popper-echo-mode +1))
+
+(use-package zoom-window
+  :custom (zoom-window-mode-line-color nil))
 
 ;; Evil Mode
 (use-package evil
