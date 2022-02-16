@@ -4,10 +4,11 @@
 ;; TODO: stop saving #file.ext#
 ;; TODO: hide special buffers in buffer-list
 ;; TODO: improve pop-up experience (vterm, vertico, which-key conflicts, etc.)
-;; TODO: improve +workspaces ux (display after changes, add +workspace/new without naming, etc.)
+;; TODO: improve +workspaces ux (display after changes, add +workspace/new without naming, etc.) -> use persp-mode
 ;; TODO: simplify modeline (remove perspectives & POPUP)
 ;; TODO: make C-c and C-r "instantaneous" in vterm & eshell
 ;; TODO: fuzzy-find files & text (ripgrep)
+
 ;; TODO: add projectile.el
 ;; TODO: add magit
 ;; TODO: add org-mode
@@ -92,6 +93,7 @@
   (leader-keys
     "," '(switch-to-buffer :which-key "Switch to buffer")
     "." '(find-file :which-key "Find file")
+
     ;; Window
     "w s" '(evil-window-split :which-key "Horizontal split")
     "w S" '(split-window-horizontally-with-focus :which-key "Horizontal split with focus")
@@ -238,7 +240,10 @@
 
 (use-package vterm
   :commands vterm
-  :hook (vterm-mode . (lambda () (display-line-numbers-mode 0)))
+  :hook
+  (vterm-mode . (lambda ()
+		  (display-line-numbers-mode 0)
+		  (evil-insert-state)))
   :config
   (setq vterm-shell "zsh")
   (setq vterm-max-scrollback 10000))
