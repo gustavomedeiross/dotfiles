@@ -8,6 +8,7 @@
 ;; TODO: simplify modeline (remove perspectives & POPUP)
 ;; TODO: make C-c and C-r "instantaneous" in vterm & eshell
 ;; TODO: fuzzy-find files & text (ripgrep)
+;; TODO: cleanup & remove doom mentions from "workspaces.el" 
 
 ;; TODO: add projectile.el
 ;; TODO: add magit
@@ -91,7 +92,8 @@
     :keymaps '(normal visual emacs override)
     :prefix "SPC")
   (leader-keys
-    "," '(switch-to-buffer :which-key "Switch to buffer")
+    "," '(persp-switch-to-buffer :which-key "Switch to buffer")
+    "<" '(switch-to-buffer :which-key "Switch to buffer (global)")
     "." '(find-file :which-key "Find file")
 
     ;; Window
@@ -108,10 +110,12 @@
     "w l" '(windmove-right :which-key "Move to right window")
 
     ;; Workspaces
-    "TAB n" '(persp-switch :which-key "New workspace")
+    "TAB n" '(+workspace/new :which-key "New workspace")
+    "TAB N" '(+workspace/new-named :which-key "New named workspace")
     "TAB ." '(persp-switch :which-key "Switch to a workspace")
     "TAB c" '(persp-switch :which-key "Create or switch to a workspace")
     "TAB r" '(persp-rename :which-key "Rename workspace")
+    "TAB d" '(+workspace/delete :which-key "Delete workspace")
     "TAB [" '(persp-prev :which-key "Previous workspace")
     "TAB ]" '(persp-next :which-key "Next workspace")
     "TAB 1" '(+workspace/switch-to-0 :which-key "Switch to 1st workspace")
@@ -159,13 +163,22 @@
     "C-j"      #'vertico-next
     "C-k"      #'vertico-previous))
 
-(use-package perspective
+;; (use-package perspective
+;;   :init
+;;   (persp-mode)
+;;   :custom
+;;   (persp-sort 'created))
+
+
+(load-file "~/.emacs.default/workspaces.el")
+
+(use-package persp-mode
   :init
   (persp-mode)
   :custom
-  (persp-sort 'created))
-
-(load-file "~/.emacs.default/workspaces.el")
+  (persp-auto-save-opt 0)
+  (persp-auto-resume-time -1)
+  (persp-nil-name +workspaces-main))
 
 ;; UI
 
@@ -175,21 +188,37 @@
 (use-package doom-modeline
  :init (doom-modeline-mode 1))
 
-(use-package popper
-  :bind (("C-`"   . popper-toggle-latest)
-         ("M-`"   . popper-cycle)
-         ("C-M-`" . popper-toggle-type))
-  :init
-  (setq popper-reference-buffers
-	'("\\*Messages\\*"
-	"Output\\*$"
-	"\\*Async Shell Command\\*"
-	help-mode
-	compilation-mode
-	inferior-haskell-mode
-	vterm-mode))
-  (popper-mode +1)
-  (popper-echo-mode +1))
+;; (use-package emacs
+;;   :custom
+;;   (display-buffer-alist
+;;    '(("\\*e?shell\\*"
+;;       (display-buffer-in-side-window)
+;;       (window-height . 0.25)
+;;       (side . bottom)
+;;       (slot . -1))
+;;      ("^\\*vterm"
+;;       (display-buffer-in-side-window)
+;;       (display-buffer-in-side-window)
+;;       (window-height . 0.25)
+;;       (side . bottom)
+;;       (slot . -4)
+;;       ))))
+
+;; (use-package popper
+;;   :bind (("C-`"   . popper-toggle-latest)
+;;          ("M-`"   . popper-cycle)
+;;          ("C-M-`" . popper-toggle-type))
+;;   :init
+;;   (setq popper-reference-buffers
+;; 	'("\\*Messages\\*"
+;; 	"Output\\*$"
+;; 	"\\*Async Shell Command\\*"
+;; 	help-mode
+;; 	compilation-mode
+;; 	inferior-haskell-mode
+;; 	vterm-mode))
+;;   (popper-mode +1)
+;;   (popper-echo-mode +1))
 
 (use-package zoom-window
   :custom (zoom-window-mode-line-color nil))
@@ -202,7 +231,8 @@
   (setq evil-undo-system 'undo-tree)
   :config
   (evil-mode 1)
-  (setq evil-insert-state-cursor 'box))
+  (setq evil-insert-state-cursor 'box)
+  (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode))
 
 (use-package evil-collection
   :after evil
