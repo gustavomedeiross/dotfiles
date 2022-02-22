@@ -8,9 +8,8 @@
 ;; TODO: simplify modeline (remove perspectives & POPUP)
 ;; TODO: make C-c and C-r "instantaneous" in vterm & eshell
 ;; TODO: fuzzy-find files & text (ripgrep)
-;; TODO: cleanup & remove doom mentions from "workspaces.el" 
-
 ;; TODO: add projectile.el
+;; TODO: add projectile.el + persp-mode integration (already in "workspaces.el")
 ;; TODO: add magit
 ;; TODO: add org-mode
 
@@ -162,13 +161,6 @@
     "C-K"      #'vertico-previous-group
     "C-j"      #'vertico-next
     "C-k"      #'vertico-previous))
-
-;; (use-package perspective
-;;   :init
-;;   (persp-mode)
-;;   :custom
-;;   (persp-sort 'created))
-
 
 (load-file "~/.emacs.default/workspaces.el")
 
