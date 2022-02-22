@@ -10,7 +10,6 @@
 ;; TODO: fuzzy-find files & text (ripgrep)
 ;; TODO: add projectile.el
 ;; TODO: add projectile.el + persp-mode integration (already in "workspaces.el")
-;; TODO: add magit
 ;; TODO: add org-mode
 
 
@@ -107,6 +106,9 @@
     "w j" '(windmove-down :which-key "Move to lower window")
     "w k" '(windmove-up :which-key "Move to upper window")
     "w l" '(windmove-right :which-key "Move to right window")
+
+    ;; Magit
+    "g s" '(magit-status :which-key "Magit status")
 
     ;; Workspaces
     "TAB n" '(+workspace/new :which-key "New workspace")
@@ -270,6 +272,13 @@
   (setq vterm-shell "zsh")
   (setq vterm-max-scrollback 10000))
 
+
+;; Magit
+
+(use-package magit
+  :commands (magit-status magit-get-current-branch)
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 ;; LSP & Auto-completion
 
