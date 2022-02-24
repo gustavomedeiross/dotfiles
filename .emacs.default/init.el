@@ -10,6 +10,8 @@
 ;; TODO: fuzzy-find files & text (ripgrep)
 ;; TODO: add projectile.el
 ;; TODO: add projectile.el + persp-mode integration (already in "workspaces.el")
+;; TODO: add projectile.el + vterm integration (kinda already in "vterm.el")
+;; TODO: organize vterm.el and workspaces.el modules better
 ;; TODO: add org-mode
 
 
