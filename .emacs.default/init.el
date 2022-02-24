@@ -1,4 +1,4 @@
-; TODO: add >> or << support in visual mode
+;; TODO: add >> or << support in visual mode
 ;; TODO: remove mouse hover on suggestions lsp and/or company mode
 ;; TODO: remove checkers below modeline on mouse hover (lsp and/or flycheck)
 ;; TODO: stop saving #file.ext#
@@ -90,8 +90,7 @@
     :keymaps '(normal visual emacs override)
     :prefix "SPC")
   (leader-keys
-    "," '(persp-switch-to-buffer :which-key "Switch to buffer")
-    "<" '(switch-to-buffer :which-key "Switch to buffer (global)")
+    "," '(switch-to-buffer :which-key "Switch to buffer")
     "." '(find-file :which-key "Find file")
 
     ;; Window
@@ -109,6 +108,10 @@
 
     ;; Magit
     "g s" '(magit-status :which-key "Magit status")
+
+    ;; Terminal
+    "o t" '(vterm :which-key "Open vterm")
+    "o T" '(vterm :which-key "Open new vterm window")
 
     ;; Workspaces
     "TAB n" '(+workspace/new :which-key "New workspace")
@@ -271,6 +274,7 @@
   :config
   (setq vterm-shell "zsh")
   (setq vterm-max-scrollback 10000))
+(load-file "~/.emacs.default/vterm.el")
 
 
 ;; Magit
