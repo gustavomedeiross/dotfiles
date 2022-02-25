@@ -32,6 +32,12 @@
 (setq display-line-numbers-type 'relative)
 
 
+;; MacOS
+(setq mac-option-key-is-meta nil
+      mac-command-key-is-meta t
+      mac-command-modifier 'meta
+      mac-option-modifier 'none)
+
 ;; Initialize package sources
 (require 'package)
 
@@ -223,6 +229,14 @@
   :custom (zoom-window-mode-line-color nil))
 
 ;; Evil Mode
+
+(use-package undo-tree
+  :init
+  (global-undo-tree-mode 1)
+  :config
+  (setq undo-tree-auto-save-history nil))
+
+
 (use-package evil
   :init
   (setq evil-want-integration t)
@@ -244,12 +258,6 @@
   :config
   (evil-escape-mode)
   (setq evil-escape-excluded-major-modes '(vterm-mode)))
-
-(use-package undo-tree
-  :init
-  (global-undo-tree-mode 1)
-  :config
-  (setq undo-tree-auto-save-history nil))
 
 ;; Shell
 
@@ -331,13 +339,14 @@
   (add-hook 'haskell-mode-hook #'lsp)
   (add-hook 'haskell-literate-mode-hook #'lsp))
 
-;; OCaml
 (use-package tuareg)
-;; (use-package lsp-ocaml)
+(use-package lsp-ocaml)
 
-;; TypeScript
 (use-package typescript-mode
   :mode "\\.ts\\'"
   :hook (typescript-mode . lsp-deferred)
   :config
   (setq typescript-indent-level 2))
+
+;; TODO: improve
+(use-package kotlin-mode)
