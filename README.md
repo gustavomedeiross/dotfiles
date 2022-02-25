@@ -1,17 +1,13 @@
 # dotfiles
 
-Git bare repository:
+Cloning the repo to a new machine:
 
 ```sh
-git init --bare $HOME/.dotfiles
-
-# only required if the alias doesn't exist yet
-echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.zshrc
-source ~/.zshrc
-
+git clone --bare git@github.com:mendes13/dotfiles.git .dotfiles
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 dotfiles config --local status.showUntrackedFiles no
+dotfiles checkout
 ```
-
 
 ```sh
 sudo pacman -S xorg xorg-xinit vim tmux nitrogen picom 
