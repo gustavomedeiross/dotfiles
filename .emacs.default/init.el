@@ -81,6 +81,9 @@
   :init
   (vertico-mode))
 
+(use-package consult
+  :hook (completion-list-mode . consult-preview-at-point-mode))
+
 (defun split-window-vertically-with-focus ()
   (interactive)
   (evil-window-vsplit)
@@ -120,6 +123,10 @@
     ;; Terminal
     "o t" '(vterm :which-key "Open vterm")
     "o T" '(vterm :which-key "Open new vterm window")
+
+    ;; Project
+    "p f" '(consult-find :which-key "Run a fuzzy find against project files")
+    "p s" '(consult-ripgrep :which-key "Run ripgrep against project files")
 
     ;; Workspaces
     "TAB n" '(+workspace/new :which-key "New workspace")
@@ -294,6 +301,13 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
+;; Projectile
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :init
+  (setq projectile-switch-project-action #'projectile-dired))
+
 ;; LSP & Auto-completion
 
 (use-package lsp-mode
@@ -340,7 +354,6 @@
   (add-hook 'haskell-literate-mode-hook #'lsp))
 
 (use-package tuareg)
-(use-package lsp-ocaml)
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
