@@ -4,11 +4,8 @@
 ;; TODO: stop saving #file.ext#
 ;; TODO: hide special buffers in buffer-list
 ;; TODO: improve pop-up experience (vterm, vertico, which-key conflicts, etc.)
-;; TODO: improve +workspaces ux (display after changes, add +workspace/new without naming, etc.) -> use persp-mode
 ;; TODO: simplify modeline (remove perspectives & POPUP)
 ;; TODO: make C-c and C-r "instantaneous" in vterm & eshell
-;; TODO: fuzzy-find files & text (ripgrep)
-;; TODO: add projectile.el
 ;; TODO: add projectile.el + persp-mode integration (already in "workspaces.el")
 ;; TODO: add projectile.el + vterm integration (kinda already in "vterm.el")
 ;; TODO: organize vterm.el and workspaces.el modules better
