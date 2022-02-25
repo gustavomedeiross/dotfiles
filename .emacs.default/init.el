@@ -358,5 +358,6 @@
   :config
   (setq typescript-indent-level 2))
 
-;; TODO: improve
 (use-package kotlin-mode)
+
+(use-package php-mode)
