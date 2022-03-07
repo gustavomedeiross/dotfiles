@@ -290,9 +290,13 @@
   (setq vterm-max-scrollback 10000))
 (load-file "~/.emacs.default/vterm.el")
 
+(use-package exec-path-from-shell
+  :init
+  (exec-path-from-shell-initialize)
+  :config
+  (exec-path-from-shell-copy-envs '("PATH")))
 
 ;; Magit
-
 (use-package magit
   :commands (magit-status magit-get-current-branch)
   :custom
@@ -358,6 +362,10 @@
   :config
   (setq typescript-indent-level 2))
 
-(use-package kotlin-mode)
+(use-package kotlin-mode
+  :mode "\\.kt\\'"
+  :hook (kotlin-mode . lsp-deferred))
 
-(use-package php-mode)
+(use-package php-mode
+  :mode "\\.php\\'"
+  :hook (php-mode . lsp-deferred))
