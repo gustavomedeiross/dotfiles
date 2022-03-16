@@ -40,6 +40,9 @@
 (setq auto-save-file-name-transforms
       `((".*" ,user-temporary-file-directory t)))
 
+;; Makes emacs frame maximized by default (useful for floating window managers systems)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 ;; MacOS
 (setq mac-option-key-is-meta nil
       mac-command-key-is-meta t
