@@ -1,7 +1,6 @@
 ;; TODO: add >> or << support in visual mode
 ;; TODO: remove mouse hover on suggestions lsp and/or company mode
 ;; TODO: remove checkers below modeline on mouse hover (lsp and/or flycheck)
-;; TODO: stop saving #file.ext#
 ;; TODO: hide special buffers in buffer-list
 ;; TODO: improve pop-up experience (vterm, vertico, which-key conflicts, etc.)
 ;; TODO: simplify modeline (remove perspectives & POPUP)
@@ -110,7 +109,8 @@
     :keymaps '(normal visual emacs override)
     :prefix "SPC")
   (leader-keys
-    "," '(switch-to-buffer :which-key "Switch to buffer")
+    "," '(+vertico/switch-workspace-buffer :which-key "Switch to buffer")
+    "<" '(switch-to-buffer :which-key "Switch to buffer")
     "." '(find-file :which-key "Find file")
 
     ;; Window
@@ -192,6 +192,7 @@
     "C-k"      #'vertico-previous))
 
 (load-file "~/.emacs.default/workspaces.el")
+(load-file "~/.emacs.default/workspaces-vertico.el")
 
 (use-package persp-mode
   :init
