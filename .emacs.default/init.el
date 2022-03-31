@@ -213,21 +213,15 @@
 (use-package doom-modeline
  :init (doom-modeline-mode 1))
 
-;; (use-package emacs
-;;   :custom
-;;   (display-buffer-alist
-;;    '(("\\*e?shell\\*"
-;;       (display-buffer-in-side-window)
-;;       (window-height . 0.25)
-;;       (side . bottom)
-;;       (slot . -1))
-;;      ("^\\*vterm"
-;;       (display-buffer-in-side-window)
-;;       (display-buffer-in-side-window)
-;;       (window-height . 0.25)
-;;       (side . bottom)
-;;       (slot . -4)
-;;       ))))
+(use-package emacs
+  :custom
+  (display-buffer-alist
+   ;; '((inferior-haskell-mode
+   '(("\\*haskell\\*"
+      (display-buffer-in-side-window)
+      (window-height . 0.25)
+      (side . bottom)
+      (slot . -1)))))
 
 ;; (use-package popper
 ;;   :bind (("C-`"   . popper-toggle-latest)
