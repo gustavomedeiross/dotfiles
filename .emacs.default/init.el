@@ -112,8 +112,8 @@
     :keymaps '(normal visual emacs override)
     :prefix "SPC")
   (leader-keys
-    "," '(+vertico/switch-workspace-buffer :which-key "Switch to buffer")
-    "<" '(switch-to-buffer :which-key "Switch to buffer")
+    "," '(switch-to-buffer :which-key "Switch to buffer")
+    "<" '(persp-switch-to-buffer :which-key "Switch to buffer (But to another perspective if necessary)")
     "." '(find-file :which-key "Find file")
 
     ;; Window
@@ -141,23 +141,10 @@
     "p s" '(consult-ripgrep :which-key "Run ripgrep against project files")
 
     ;; Workspaces
-    "TAB n" '(+workspace/new :which-key "New workspace")
-    "TAB N" '(+workspace/new-named :which-key "New named workspace")
-    "TAB ." '(persp-switch :which-key "Switch to a workspace")
-    "TAB c" '(persp-switch :which-key "Create or switch to a workspace")
-    "TAB r" '(persp-rename :which-key "Rename workspace")
-    "TAB d" '(+workspace/delete :which-key "Delete workspace")
-    "TAB [" '(persp-prev :which-key "Previous workspace")
-    "TAB ]" '(persp-next :which-key "Next workspace")
-    "TAB 1" '(+workspace/switch-to-0 :which-key "Switch to 1st workspace")
-    "TAB 2" '(+workspace/switch-to-1 :which-key "Switch to 2st workspace")
-    "TAB 3" '(+workspace/switch-to-2 :which-key "Switch to 3rd workspace")
-    "TAB 4" '(+workspace/switch-to-3 :which-key "Switch to 4th workspace")
-    "TAB 5" '(+workspace/switch-to-4 :which-key "Switch to 5th workspace")
-    "TAB 6" '(+workspace/switch-to-5 :which-key "Switch to 6th workspace")
-    "TAB 7" '(+workspace/switch-to-6 :which-key "Switch to 7th workspace")
-    "TAB 8" '(+workspace/switch-to-7 :which-key "Switch to 8th workspace")
-    "TAB 9" '(+workspace/switch-to-8 :which-key "Switch to 9th workspace"))
+    "TAB ," '(persp-switch :which-key "Switch to a workspace")
+    "TAB d" '(persp-kill :which-key "Delete workspace")
+    "TAB k" '(persp-kill :which-key "Delete workspace")
+    "TAB q" '(persp-kill :which-key "Delete workspace"))
 
   (general-create-definer tmux-keys
     :keymaps '(normal visual emacs)
@@ -194,16 +181,8 @@
     "C-j"      #'vertico-next
     "C-k"      #'vertico-previous))
 
-(load-file "~/.emacs.default/workspaces.el")
-(load-file "~/.emacs.default/workspaces-vertico.el")
-
-(use-package persp-mode
-  :init
-  (persp-mode)
-  :custom
-  (persp-auto-save-opt 0)
-  (persp-auto-resume-time -1)
-  (persp-nil-name +workspaces-main))
+(use-package perspective
+  :init (persp-mode))
 
 ;; UI
 
@@ -361,25 +340,29 @@
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
 
+;; Haskell
 (use-package lsp-haskell)
-
 (use-package haskell-mode
   :init
   (add-hook 'haskell-mode-hook #'lsp)
   (add-hook 'haskell-literate-mode-hook #'lsp))
 
+;; OCaml
 (use-package tuareg)
 
+;; TypeScript
 (use-package typescript-mode
   :mode "\\.ts\\'"
   :hook (typescript-mode . lsp-deferred)
   :config
   (setq typescript-indent-level 2))
 
+;; Kotlin
 (use-package kotlin-mode
   :mode "\\.kt\\'"
   :hook (kotlin-mode . lsp-deferred))
 
+;; PHP
 (use-package php-mode
   :mode "\\.php\\'"
   :hook (php-mode . lsp-deferred))
