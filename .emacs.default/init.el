@@ -182,7 +182,9 @@
     "C-k"      #'vertico-previous))
 
 (use-package perspective
-  :init (persp-mode))
+  :init (persp-mode)
+  :custom
+  (persp-suppress-no-prefix-key-warning t))
 
 ;; UI
 
