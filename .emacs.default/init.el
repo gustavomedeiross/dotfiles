@@ -19,6 +19,7 @@
 (tooltip-mode -1) ; Disable tooltips
 (set-fringe-mode 10) ; Give some breathing room
 (menu-bar-mode -1) ; Disable the menu bar
+(global-eldoc-mode -1) ; Disable eldoc
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -321,7 +322,8 @@
   (lsp-modeline-code-actions-enable nil)
   (lsp-eldoc-enable-hover nil)
   (lsp-modeline-diagnostics-enable nil)
-  (lsp-signature-auto-activate nil))
+  (lsp-signature-auto-activate nil)
+  (lsp-signature-render-documentation nil))
 
 (use-package company
   :after lsp-mode
