@@ -350,7 +350,14 @@
   (add-hook 'haskell-literate-mode-hook #'lsp))
 
 ;; OCaml
-(use-package tuareg)
+(use-package tuareg
+  :hook (tuareg-mode . lsp-deferred)
+  :config
+  (lsp-register-client
+    (make-lsp-client
+     :new-connection (lsp-stdio-connection '("opam" "exec" "--" "ocamllsp"))
+     :major-modes '(tuareg-mode)
+     :server-id 'ocamlmerlin-lsp)))
 
 ;; TypeScript
 (use-package typescript-mode
