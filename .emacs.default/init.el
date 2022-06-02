@@ -13,6 +13,7 @@
 
 (setq inhibit-startup-message t) ; Remove welcome screen
 (setq make-backup-files nil) ; Disable backup~ files
+(setq create-lockfiles nil) ; Disable .#lock files
 (setq ring-bell-function 'ignore) ; Disable beeps
 (scroll-bar-mode -1) ; Disable visible scrollbar
 (tool-bar-mode -1) ; Disable the toolbar
@@ -27,6 +28,11 @@
 (column-number-mode)
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type 'relative)
+
+
+;; Make background transparent
+(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
 ;; Move autosave and backup files to ~/.auto-saves
 (defvar user-temporary-file-directory
