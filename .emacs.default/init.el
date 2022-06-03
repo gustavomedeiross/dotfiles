@@ -22,6 +22,11 @@
 (menu-bar-mode -1) ; Disable the menu bar
 (global-eldoc-mode -1) ; Disable eldoc
 
+;; Tabs
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -138,6 +143,7 @@
 
     ;; Magit
     "g s" '(magit-status :which-key "Magit status")
+    "g g" '(magit-status :which-key "Magit status")
 
     ;; Terminal
     "o t" '(vterm :which-key "Open vterm")
@@ -231,23 +237,13 @@
   :custom (zoom-window-mode-line-color nil))
 
 ;; Evil Mode
-
-(use-package undo-tree
-  :init
-  (global-undo-tree-mode 1)
-  :config
-  (setq undo-tree-auto-save-history nil))
-
-
 (use-package evil
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
-  (setq evil-undo-system 'undo-tree)
   :config
   (evil-mode 1)
-  (setq evil-insert-state-cursor 'box)
-  (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode))
+  (setq evil-insert-state-cursor 'box))
 
 (use-package evil-collection
   :after evil
@@ -261,8 +257,15 @@
   (evil-escape-mode)
   (setq evil-escape-excluded-major-modes '(vterm-mode)))
 
-;; Shell
+(use-package undo-tree
+  :after evil
+  :diminish
+  :config
+  (setq undo-tree-auto-save-history nil)
+  (global-undo-tree-mode 1)
+  (evil-set-undo-system 'undo-tree))
 
+;; Shell
 (use-package eshell
   :hook
   (eshell-mode . (lambda () (display-line-numbers-mode 0)))
