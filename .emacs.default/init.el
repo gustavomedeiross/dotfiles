@@ -6,7 +6,6 @@
 ;; TODO: simplify modeline (remove perspectives & POPUP)
 ;; TODO: make C-c and C-r "instantaneous" in vterm & eshell
 ;; TODO: add projectile.el + persp-mode integration (already in "workspaces.el")
-;; TODO: add projectile.el + vterm integration (kinda already in "vterm.el")
 ;; TODO: organize vterm.el and workspaces.el modules better
 ;; TODO: add org-mode
 
@@ -36,8 +35,8 @@
 
 
 ;; Make background transparent
-(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
-(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+(set-frame-parameter (selected-frame) 'alpha '(80 . 80))
+(add-to-list 'default-frame-alist '(alpha . (80 . 80)))
 
 ;; Move autosave and backup files to ~/.auto-saves
 (defvar user-temporary-file-directory
@@ -146,8 +145,7 @@
     "g g" '(magit-status :which-key "Magit status")
 
     ;; Terminal
-    "o t" '(vterm :which-key "Open vterm")
-    "o T" '(vterm :which-key "Open new vterm window")
+    "o t" '(multi-vterm :which-key "Open new vterm window")
 
     ;; Project
     "p f" '(consult-find :which-key "Run a fuzzy find against project files")
@@ -280,7 +278,7 @@
 	eshell-scroll-to-bottom-on-input t)
   (evil-normalize-keymaps))
 
-(use-package vterm
+(use-package multi-vterm
   :commands vterm
   :hook
   (vterm-mode . (lambda ()
@@ -289,7 +287,6 @@
   :config
   (setq vterm-shell "zsh")
   (setq vterm-max-scrollback 10000))
-(load-file "~/.emacs.default/vterm.el")
 
 (use-package exec-path-from-shell
   :init
