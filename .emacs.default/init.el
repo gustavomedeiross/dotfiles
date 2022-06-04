@@ -239,6 +239,7 @@
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-fu)
   :config
   (evil-mode 1)
   (setq evil-insert-state-cursor 'box))
@@ -255,13 +256,14 @@
   (evil-escape-mode)
   (setq evil-escape-excluded-major-modes '(vterm-mode)))
 
-(use-package undo-tree
-  :after evil
-  :diminish
-  :config
-  (setq undo-tree-auto-save-history nil)
-  (global-undo-tree-mode 1)
-  (evil-set-undo-system 'undo-tree))
+;; Undo
+(use-package undo-fu
+  :ensure t
+  :commands (undo-fu-only-undo)
+  :defer nil)
+(use-package undo-fu-session
+  :ensure t
+  :init (global-undo-fu-session-mode))
 
 ;; Shell
 (use-package eshell
