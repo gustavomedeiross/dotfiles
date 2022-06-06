@@ -35,8 +35,8 @@
 
 
 ;; Make background transparent
-(set-frame-parameter (selected-frame) 'alpha '(80 . 80))
-(add-to-list 'default-frame-alist '(alpha . (80 . 80)))
+(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
 ;; Move autosave and backup files to ~/.auto-saves
 (defvar user-temporary-file-directory
@@ -139,6 +139,9 @@
     "w j" '(windmove-down :which-key "Move to lower window")
     "w k" '(windmove-up :which-key "Move to upper window")
     "w l" '(windmove-right :which-key "Move to right window")
+
+    ;; Buffers
+    "b k" '(kill-buffer :which-key "Kill buffer")
 
     ;; Magit
     "g s" '(magit-status :which-key "Magit status")
