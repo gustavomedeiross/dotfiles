@@ -142,6 +142,7 @@
 
     ;; Buffers
     "b k" '(kill-buffer :which-key "Kill buffer")
+    "b r" '(rename-buffer :which-key "Rename buffer")
 
     ;; Magit
     "g s" '(magit-status :which-key "Magit status")
