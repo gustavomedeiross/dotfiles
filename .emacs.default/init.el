@@ -173,7 +173,8 @@
   (general-define-key
     :states 'normal
     :keymaps '(normal override)
-    "K" '(lsp-ui-doc-glance :which-key "Show module docs"))
+    "K" '(lsp-ui-doc-glance :which-key "Show module docs")
+    "g r" '(lsp-find-references :which-key "Find usages of code"))
 
   (general-define-key
     :keymaps '(normal visual)
@@ -355,6 +356,10 @@
   :after flycheck
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+
+(use-package json-mode)
+
+(use-package yaml-mode)
 
 ;; Haskell
 (use-package lsp-haskell)
