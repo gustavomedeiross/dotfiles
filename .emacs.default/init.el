@@ -323,7 +323,9 @@
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :config
-  (lsp-enable-which-key-integration t))
+  (lsp-enable-which-key-integration t)
+  (setq lsp-enable-file-watchers t)
+  (setq lsp-file-watch-threshold nil))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
