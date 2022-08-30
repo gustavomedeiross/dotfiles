@@ -38,6 +38,9 @@
 (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
+;; Auto-refresh dired
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+
 ;; Move autosave and backup files to ~/.auto-saves
 (defvar user-temporary-file-directory
   (concat temporary-file-directory user-login-name "/"))
