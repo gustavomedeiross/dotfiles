@@ -383,6 +383,10 @@
      :major-modes '(tuareg-mode)
      :server-id 'ocamlmerlin-lsp)))
 
+;; Elixir
+(use-package elixir-mode
+  :hook (elixir-mode . lsp-deferred))
+
 ;; TypeScript
 (use-package typescript-mode
   :mode "\\.ts\\'"
