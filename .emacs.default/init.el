@@ -185,15 +185,7 @@
 
   (general-define-key
     :keymaps '(insert normal)
-    "C-SPC" '(company-complete :which-key "Trigger completion at point"))
-
-  ;; Vi keybindings to navigate between splits
-  (general-define-key
-    :keymaps '(normal emacs)
-    "C-h" '(windmove-left :which-key "Move to left window")
-    "C-j" '(windmove-down :which-key "Move to lower window")
-    "C-k" '(windmove-up :which-key "Move to upper window")
-    "C-l" '(windmove-right :which-key "Move to right window")))
+    "C-SPC" '(company-complete :which-key "Trigger completion at point")))
 
 ;; Add vim keybindings to vertico
 ;; TODO: put this inside "use-package" somehow
