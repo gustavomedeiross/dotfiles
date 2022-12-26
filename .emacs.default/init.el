@@ -183,7 +183,11 @@
     :keymaps '(normal visual)
     "C-/" '(comment-or-uncomment-region :which-key "Comment or uncomment region"))
 
-  ; Vi keybindings to navigate between splits
+  (general-define-key
+    :keymaps '(insert normal)
+    "C-SPC" '(company-complete :which-key "Trigger completion at point"))
+
+  ;; Vi keybindings to navigate between splits
   (general-define-key
     :keymaps '(normal emacs)
     "C-h" '(windmove-left :which-key "Move to left window")
@@ -386,6 +390,10 @@
 ;; Elixir
 (use-package elixir-mode
   :hook (elixir-mode . lsp-deferred))
+
+;; Rust
+(use-package rust-mode
+  :hook (rust-mode . lsp-deferred))
 
 ;; TypeScript
 (use-package typescript-mode
