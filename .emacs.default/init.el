@@ -203,28 +203,11 @@
 (use-package emacs
   :custom
   (display-buffer-alist
-   ;; '((inferior-haskell-mode
    '(("\\*haskell\\*"
       (display-buffer-in-side-window)
       (window-height . 0.25)
       (side . bottom)
       (slot . -1)))))
-
-;; (use-package popper
-;;   :bind (("C-`"   . popper-toggle-latest)
-;;          ("M-`"   . popper-cycle)
-;;          ("C-M-`" . popper-toggle-type))
-;;   :init
-;;   (setq popper-reference-buffers
-;; 	'("\\*Messages\\*"
-;; 	"Output\\*$"
-;; 	"\\*Async Shell Command\\*"
-;; 	help-mode
-;; 	compilation-mode
-;; 	inferior-haskell-mode
-;; 	vterm-mode))
-;;   (popper-mode +1)
-;;   (popper-echo-mode +1))
 
 (use-package zoom-window
   :custom (zoom-window-mode-line-color nil))
