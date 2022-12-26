@@ -164,15 +164,6 @@
     "TAB k" '(persp-kill :which-key "Delete workspace")
     "TAB q" '(persp-kill :which-key "Delete workspace"))
 
-  (general-create-definer tmux-keys
-    :keymaps '(normal visual emacs)
-    :prefix "C-a")
-  (tmux-keys
-    "%" '(split-window-vertically-with-focus :which-key "Horizontal split")
-    "\"" '(split-window-horizontally-with-focus :which-key "Vertical split")
-    "x y" '(delete-window :which-key "Delete window")
-    "z" '(zoom-window-zoom :which-key "Toggle window zoom"))
-
   (general-define-key
     :states 'normal
     :keymaps '(normal override)
