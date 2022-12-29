@@ -41,7 +41,7 @@ bindkey -M viins 'jk' vi-cmd-mode
 alias dotfiles="/usr/bin/git --git-dir=/$HOME/.dotfiles/ --work-tree=/$HOME"
 
 # Add local scripts to PATH
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Load computer specific configurations
 source "$HOME/.local/zsh.sh"

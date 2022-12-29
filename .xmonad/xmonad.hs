@@ -258,6 +258,7 @@ myStartupHook = do
         spawnOnce "setxkbmap -layout us &"
         spawnOnce "nitrogen --restore &"
         spawnOnce "picom -f &"
+        spawnOnce "/usr/bin/emacs --daemon &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
