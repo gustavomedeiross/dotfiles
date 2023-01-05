@@ -258,6 +258,13 @@
 	eshell-scroll-to-bottom-on-input t)
   (evil-normalize-keymaps))
 
+(defun spawn-eshell (name)
+  "Create a new named eshell buffer"
+  (interactive "MName: ")
+  (setq name (concat "$" name))
+  (eshell)
+  (rename-buffer name))
+
 (use-package multi-vterm
   :commands vterm
   :hook
