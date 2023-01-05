@@ -13,6 +13,8 @@ dotfiles checkout
 sudo pacman -S xorg xorg-xinit vim tmux nitrogen picom 
 ```
 
+TODO: nixify config
+
 basic stuff: 
 - xorg
 - xorg-xinit (I need to make the `~/.xinitrc` file)
