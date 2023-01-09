@@ -3,7 +3,7 @@
 Cloning the repo to a new machine:
 
 ```sh
-git clone --bare git@github.com:mendes13/dotfiles.git .dotfiles
+git clone --bare git@github.com:gustavomdeiros/dotfiles.git .dotfiles
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 dotfiles config --local status.showUntrackedFiles no
 dotfiles checkout
