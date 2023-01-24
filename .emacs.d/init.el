@@ -236,12 +236,11 @@
 
 ;; Undo
 (use-package undo-fu
-  :ensure t
   :commands (undo-fu-only-undo)
   :defer nil)
+
 (use-package undo-fu-session
-  :ensure t
-  :init (global-undo-fu-session-mode))
+  :init (undo-fu-session-global-mode))
 
 ;; Shell
 (use-package eshell
