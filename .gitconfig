@@ -14,3 +14,9 @@
 	defaultBranch = master
 [pull]
 	rebase = false
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
