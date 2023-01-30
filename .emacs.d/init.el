@@ -85,9 +85,9 @@
 
 ;; Package specifics
 
+;; Move these gm/* functions to use-package clause
 (defun gm/org-mode-setup ()
   (org-indent-mode)
-  (variable-pitch-mode 1)
   (visual-line-mode 1))
 
 (defun gm/org-font-setup ()
@@ -192,8 +192,11 @@
     "g s" '(magit-status :which-key "Magit status")
     "g g" '(magit-status :which-key "Magit status")
 
+    ;; Org Mode
+    "o t" '(org-todo :which-key "Org TODO")
+
     ;; Terminal
-    "o t" '(multi-vterm :which-key "Open new vterm window")
+    "t n" '(multi-vterm :which-key "Open new vterm window")
 
     ;; Project
     "p f" '(consult-find :which-key "Run a fuzzy find against project files")
@@ -201,6 +204,7 @@
 
     ;; Workspaces
     "TAB ," '(persp-switch :which-key "Switch to a workspace")
+    "TAB r" '(persp-rename :which-key "Rename workspace")
     "TAB d" '(persp-kill :which-key "Delete workspace")
     "TAB k" '(persp-kill :which-key "Delete workspace")
     "TAB q" '(persp-kill :which-key "Delete workspace"))
@@ -212,12 +216,12 @@
     "g r" '(lsp-find-references :which-key "Find usages of code"))
 
   (general-define-key
-    :keymaps '(normal visual)
-    "C-/" '(comment-or-uncomment-region :which-key "Comment or uncomment region"))
+    :keymaps '(insert normal)
+    "C-SPC" '(company-complete :which-key "Trigger completion at point"))
 
   (general-define-key
-    :keymaps '(insert normal)
-    "C-SPC" '(company-complete :which-key "Trigger completion at point")))
+    :keymaps '(normal visual)
+    "C-/" '(comment-or-uncomment-region :which-key "Comment or uncomment region")))
 
 ;; Add vim keybindings to vertico
 ;; TODO: put this inside "use-package" somehow
