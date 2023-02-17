@@ -73,7 +73,7 @@
 
 ;; Package specifics
 
-;; Move these gm/* functions to use-package clause
+;; TODO: Move these gm/* functions to use-package clause
 (defun gm/org-mode-setup ()
   (org-indent-mode)
   (visual-line-mode 1))
@@ -85,14 +85,15 @@
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
   ;; Set faces for heading levels
-  (dolist (face '((org-level-1 . 1.4)
-                  (org-level-2 . 1.2)
-                  (org-level-3 . 1.1)
+  (dolist (face '((org-document-title . 2.0)
+                  (org-level-1 . 1.75)
+                  (org-level-2 . 1.5)
+                  (org-level-3 . 1.25)
                   (org-level-4 . 1.1)
-                  (org-level-5 . 1.1)
-                  (org-level-6 . 1.1)
-                  (org-level-7 . 1.1)
-                  (org-level-8 . 1.1)))
+                  (org-level-5 . 1.0)
+                  (org-level-6 . 1.0)
+                  (org-level-7 . 1.0)
+                  (org-level-8 . 1.0)))
     (set-face-attribute (car face) nil :weight 'regular :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
@@ -108,7 +109,10 @@
   :hook (org-mode . gm/org-mode-setup)
   :config
   (setq org-ellipsis " ▾")
-  (gm/org-font-setup))
+  (gm/org-font-setup)
+  (setq org-todo-keywords
+      '((sequence "TODO(t)" "DOING(d)" "|" "DONE(D)")
+        (sequence "TODO(t)" "CODING(c)" "WAITING-REVIEW(r)" "|" "DONE(D)"))))
 
 (use-package org-bullets
   :after org
