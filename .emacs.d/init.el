@@ -1,15 +1,3 @@
-;; TODO: add >> or << support in visual mode
-;; TODO: remove mouse hover on suggestions lsp and/or company mode
-;; TODO: remove checkers below modeline on mouse hover (lsp and/or flycheck)
-;; TODO: hide special buffers in buffer-list
-;; TODO: improve pop-up experience (vterm, vertico, which-key conflicts, etc.)
-;; TODO: simplify modeline (remove perspectives & POPUP)
-;; TODO: make C-c and C-r "instantaneous" in vterm & eshell
-;; TODO: add projectile.el + persp-mode integration (already in "workspaces.el")
-;; TODO: organize vterm.el and workspaces.el modules better
-;; TODO: add org-mode
-
-
 (setq inhibit-startup-message t) ; Remove welcome screen
 (setq make-backup-files nil) ; Disable backup~ files
 (setq create-lockfiles nil) ; Disable .#lock files
@@ -97,10 +85,10 @@
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
   ;; Set faces for heading levels
-  (dolist (face '((org-level-1 . 1.2)
-                  (org-level-2 . 1.1)
-                  (org-level-3 . 1.05)
-                  (org-level-4 . 1.0)
+  (dolist (face '((org-level-1 . 1.4)
+                  (org-level-2 . 1.2)
+                  (org-level-3 . 1.1)
+                  (org-level-4 . 1.1)
                   (org-level-5 . 1.1)
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
