@@ -85,10 +85,10 @@
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
   ;; Set faces for heading levels
-  (dolist (face '((org-document-title . 2.0)
-                  (org-level-1 . 1.75)
-                  (org-level-2 . 1.5)
-                  (org-level-3 . 1.25)
+  (dolist (face '((org-document-title . 1.5)
+                  (org-level-1 . 1.4)
+                  (org-level-2 . 1.2)
+                  (org-level-3 . 1.1)
                   (org-level-4 . 1.1)
                   (org-level-5 . 1.0)
                   (org-level-6 . 1.0)
@@ -112,7 +112,7 @@
   (gm/org-font-setup)
   (setq org-todo-keywords
       '((sequence "TODO(t)" "DOING(d)" "|" "DONE(D)")
-        (sequence "TODO(t)" "CODING(c)" "WAITING-REVIEW(r)" "|" "DONE(D)"))))
+        (sequence "TODO(t)" "CODING(c)" "REVIEW(r)" "|" "DONE(D)"))))
 
 (use-package org-bullets
   :after org
