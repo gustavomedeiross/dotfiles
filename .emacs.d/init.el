@@ -29,6 +29,9 @@
 ;; Auto-refresh dired
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
+;; Easily copy-paste files with split windows
+(setq dired-dwim-target t)
+
 ;; Move autosave and backup files to ~/.auto-saves
 (defvar user-temporary-file-directory
   (concat temporary-file-directory user-login-name "/"))
