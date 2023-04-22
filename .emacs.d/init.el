@@ -382,12 +382,9 @@
 
 (use-package yaml-mode)
 
-;; Haskell
-(use-package lsp-haskell)
-(use-package haskell-mode
-  :init
-  (add-hook 'haskell-mode-hook #'lsp)
-  (add-hook 'haskell-literate-mode-hook #'lsp))
+;; Nix
+(use-package nix-mode
+  :mode "\\.nix\\'")
 
 ;; OCaml
 (use-package tuareg
@@ -398,6 +395,13 @@
      :new-connection (lsp-stdio-connection '("opam" "exec" "--" "ocamllsp"))
      :major-modes '(tuareg-mode)
      :server-id 'ocamlmerlin-lsp)))
+
+;; Haskell
+(use-package lsp-haskell)
+(use-package haskell-mode
+  :init
+  (add-hook 'haskell-mode-hook #'lsp)
+  (add-hook 'haskell-literate-mode-hook #'lsp))
 
 ;; Elixir
 (use-package elixir-mode
