@@ -378,6 +378,10 @@
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
 
+(use-package direnv
+ :config
+ (direnv-mode))
+
 (use-package json-mode)
 
 (use-package yaml-mode)
