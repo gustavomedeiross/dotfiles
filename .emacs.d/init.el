@@ -21,10 +21,12 @@
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type 'relative)
 
-
 ;; Make background transparent
 (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+
+;; Makes emacs frame maximized by default (useful for floating window managers systems)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Auto-refresh dired
 (add-hook 'dired-mode-hook 'auto-revert-mode)
@@ -45,9 +47,6 @@
 (setq auto-save-file-name-transforms
       `((".*" ,user-temporary-file-directory t)))
 
-;; Makes emacs frame maximized by default (useful for floating window managers systems)
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
 ;; MacOS
 (setq mac-option-key-is-meta nil
       mac-command-key-is-meta t
@@ -60,6 +59,21 @@
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
+
+;; Setup quelpa
+(unless (package-installed-p 'quelpa)
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
+    (eval-buffer)
+    (quelpa-self-upgrade)))
+
+;; Setup quelpa use-package
+(quelpa
+ '(quelpa-use-package
+   :fetcher git
+   :url "https://github.com/quelpa/quelpa-use-package.git"))
+(require 'quelpa-use-package)
+
 
 (package-initialize)
 (unless package-archive-contents
@@ -86,18 +100,6 @@
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
-  ;; Set faces for heading levels
-  (dolist (face '((org-document-title . 1.5)
-                  (org-level-1 . 1.4)
-                  (org-level-2 . 1.2)
-                  (org-level-3 . 1.1)
-                  (org-level-4 . 1.1)
-                  (org-level-5 . 1.0)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :weight 'regular :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
@@ -427,7 +429,14 @@
   :mode "\\.kt\\'"
   :hook (kotlin-mode . lsp-deferred))
 
-;; PHP
-(use-package php-mode
-  :mode "\\.php\\'"
-  :hook (php-mode . lsp-deferred))
+;; Copilot
+(use-package copilot
+  :quelpa (copilot :fetcher github
+                   :repo "zerolfx/copilot.el"
+                   :branch "main"
+                   :files ("dist" "*.el"))
+  :init
+  (add-hook 'prog-mode-hook 'copilot-mode)
+  :config
+  (define-key copilot-completion-map (kbd "C-<return>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "C-RET") 'copilot-accept-completion))
