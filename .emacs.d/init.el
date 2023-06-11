@@ -125,6 +125,12 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
+(use-package tex
+  :defer t
+  :ensure auctex
+  :config
+  (setq TeX-auto-save nil))
+
 (use-package doom-themes
   :config
   (load-theme 'doom-gruvbox t))
