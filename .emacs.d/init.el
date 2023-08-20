@@ -90,6 +90,10 @@
 
 ;; Package specifics
 
+(use-package string-inflection)
+
+(use-package git-link)
+
 ;; TODO: Move these gm/* functions to use-package clause
 (defun gm/org-mode-setup ()
   (org-indent-mode)
