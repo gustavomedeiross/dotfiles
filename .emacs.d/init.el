@@ -47,6 +47,16 @@
 (setq auto-save-file-name-transforms
       `((".*" ,user-temporary-file-directory t)))
 
+;; Copy current file path and line number to clipboard
+(defun copy-current-line-position-to-clipboard ()
+    "Copy current line in file to clipboard as '</path/to/file>:<line-number>'."
+    (interactive)
+    (let* ((project-path (projectile-project-root))
+          (path-with-line-number
+           (concat (dired-replace-in-string project-path "" (buffer-file-name)) ":" (number-to-string (line-number-at-pos)))))
+      (kill-new path-with-line-number)
+      (message (concat path-with-line-number " copied to clipboard"))))
+
 ;; MacOS
 (setq mac-option-key-is-meta nil
       mac-command-key-is-meta t
