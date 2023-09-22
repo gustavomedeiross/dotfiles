@@ -61,40 +61,26 @@
       mac-command-modifier 'meta
       mac-option-modifier 'none)
 
-;; Initialize package sources
-(require 'package)
-
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
-
-;; Setup quelpa
-(unless (package-installed-p 'quelpa)
-  (with-temp-buffer
-    (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
-    (eval-buffer)
-    (quelpa-self-upgrade)))
-
-;; Setup quelpa use-package
-(quelpa
- '(quelpa-use-package
-   :fetcher git
-   :url "https://github.com/quelpa/quelpa-use-package.git"))
-(require 'quelpa-use-package)
-
-
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-  ;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-always-ensure t)
-
 (setq custom-file (concat user-emacs-directory "/custom.el"))
+
+;; straight.el
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Replace use-package with straight-use-package
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
 ;; Package specifics
 
@@ -137,9 +123,11 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-(use-package tex
+(use-package tex-site
+  :straight (auctex :host github
+                    :repo "emacsmirror/auctex"
+                    :files (:defaults (:exclude "*.el.in")))
   :defer t
-  :ensure auctex
   :config
   (setq TeX-auto-save nil))
 
@@ -449,10 +437,7 @@
 
 ;; Copilot
 (use-package copilot
-  :quelpa (copilot :fetcher github
-                   :repo "zerolfx/copilot.el"
-                   :branch "main"
-                   :files ("dist" "*.el"))
+  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
   :init
   (add-hook 'prog-mode-hook 'copilot-mode)
   :config
