@@ -21,7 +21,7 @@
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type 'relative)
 
-(set-frame-font "Monaco 12" nil t)
+(set-frame-font "Fira Code 12" nil t)
 
 ;; Makes emacs frame maximized by default (useful for floating window managers systems)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
