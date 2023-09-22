@@ -21,9 +21,7 @@
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type 'relative)
 
-;; Make background transparent
-(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
-(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+(set-frame-font "Monaco 12" nil t)
 
 ;; Makes emacs frame maximized by default (useful for floating window managers systems)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
