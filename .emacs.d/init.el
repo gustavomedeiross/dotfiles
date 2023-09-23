@@ -232,7 +232,13 @@
   :if (display-graphic-p))
 
 (use-package doom-modeline
- :init (doom-modeline-mode 1))
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-modal nil)
+  (setq doom-modeline-battery t)
+  (setq doom-modeline-buffer-encoding nil)
+  (setq doom-modeline-lsp nil)
+  (setq doom-modeline-checker-simple-format t))
 
 (use-package doom-themes
   :config
