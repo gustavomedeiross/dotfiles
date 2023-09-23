@@ -137,7 +137,6 @@
   :config
   (setq which-key-idle-delay 1))
 
-;; Enable vertico
 (use-package vertico
   :init
   (vertico-mode))
@@ -145,12 +144,12 @@
 (use-package consult
   :hook (completion-list-mode . consult-preview-at-point-mode))
 
-(defun split-window-vertically-with-focus ()
+(defun gm/split-window-vertically-with-focus ()
   (interactive)
   (evil-window-vsplit)
   (other-window 1))
 
-(defun split-window-horizontally-with-focus ()
+(defun gm/split-window-horizontally-with-focus ()
   (interactive)
   (evil-window-split)
   (other-window 1))
@@ -168,9 +167,9 @@
 
     ;; Window
     "w s" '(evil-window-split :which-key "Horizontal split")
-    "w S" '(split-window-horizontally-with-focus :which-key "Horizontal split with focus")
+    "w S" '(gm/split-window-horizontally-with-focus :which-key "Horizontal split with focus")
     "w v" '(evil-window-vsplit :which-key "Vertical split")
-    "w V" '(split-window-vertically-with-focus :which-key "Vertical split with focus")
+    "w V" '(gm/split-window-vertically-with-focus :which-key "Vertical split with focus")
     "w c" '(evil-window-delete :which-key "Close window")
     "w q" '(evil-quit :which-key "Quit window")
     "w z" '(zoom-window-zoom :which-key "Toggle window zoom")
@@ -227,11 +226,6 @@
     "C-j"      #'vertico-next
     "C-k"      #'vertico-previous))
 
-(use-package perspective
-  :init (persp-mode)
-  :custom
-  (persp-suppress-no-prefix-key-warning t))
-
 ;; UI
 
 (use-package all-the-icons
@@ -257,6 +251,7 @@
   :custom (zoom-window-mode-line-color nil))
 
 ;; Evil Mode
+
 (use-package evil
   :init
   (setq evil-want-integration t)
@@ -278,6 +273,7 @@
   (evil-escape-mode))
 
 ;; Undo
+
 (use-package undo-fu
   :commands (undo-fu-only-undo)
   :defer nil)
@@ -286,6 +282,7 @@
   :init (undo-fu-session-global-mode))
 
 ;; Shell
+
 (use-package eshell
   :hook
   (eshell-mode . (lambda () (display-line-numbers-mode 0)))
@@ -314,6 +311,7 @@
   (exec-path-from-shell-copy-envs '("PATH")))
 
 ;; Magit
+
 (use-package magit
   :commands (magit-status magit-get-current-branch)
   :custom
@@ -322,6 +320,14 @@
   (general-define-key
    :keymaps 'transient-base-map
    "<escape>" 'transient-quit-one))
+
+;; Workspaces
+
+(use-package perspective
+  :init (persp-mode)
+  :custom
+  (persp-suppress-no-prefix-key-warning t))
+
 
 ;; Projectile
 
@@ -381,6 +387,7 @@
 (use-package yaml-mode)
 
 ;; Nix
+
 (use-package nix-mode
   :mode "\\.nix\\'")
 
