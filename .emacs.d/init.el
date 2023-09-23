@@ -131,14 +131,6 @@
   :config
   (setq TeX-auto-save nil))
 
-(use-package doom-themes
-  :config
-  (load-theme 'doom-gruvbox t))
-
-(use-package command-log-mode)
-
-(use-package doom-themes)
-
 (use-package which-key
   :init (which-key-mode)
   :diminish which-key-mode
@@ -199,7 +191,7 @@
     "o t" '(org-todo :which-key "Org TODO")
 
     ;; Terminal
-    "t n" '(multi-vterm :which-key "Open new vterm window")
+    ;; "t n" '(multi-vterm :which-key "Open new vterm window")
 
     ;; Project
     "p f" '(consult-find :which-key "Run a fuzzy find against project files")
@@ -248,6 +240,10 @@
 (use-package doom-modeline
  :init (doom-modeline-mode 1))
 
+(use-package doom-themes
+  :config
+  (load-theme 'doom-gruvbox t))
+
 (use-package emacs
   :custom
   (display-buffer-alist
@@ -279,8 +275,7 @@
   :init
   (setq-default evil-escape-key-sequence "jk")
   :config
-  (evil-escape-mode)
-  (setq evil-escape-excluded-major-modes '(vterm-mode)))
+  (evil-escape-mode))
 
 ;; Undo
 (use-package undo-fu
@@ -312,16 +307,6 @@
   (eshell)
   (rename-buffer name))
 
-(use-package multi-vterm
-  :commands vterm
-  :hook
-  (vterm-mode . (lambda ()
-		  (display-line-numbers-mode 0)
-		  (evil-insert-state)))
-  :config
-  (setq vterm-shell "zsh")
-  (setq vterm-max-scrollback 10000))
-
 (use-package exec-path-from-shell
   :init
   (exec-path-from-shell-initialize)
@@ -339,6 +324,7 @@
    "<escape>" 'transient-quit-one))
 
 ;; Projectile
+
 (use-package projectile
   :diminish projectile-mode
   :config (projectile-mode)
