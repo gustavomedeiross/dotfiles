@@ -195,6 +195,7 @@
     ;; Project
     "p f" '(consult-find :which-key "Run a fuzzy find against project files")
     "p s" '(consult-ripgrep :which-key "Run ripgrep against project files")
+    "p p" '(projectile-persp-switch-project :which-key "Switch to project in a new perspective")
 
     ;; Workspaces
     "TAB ," '(persp-switch :which-key "Switch to a workspace")
@@ -364,21 +365,25 @@
    :keymaps 'transient-base-map
    "<escape>" 'transient-quit-one))
 
-;; Workspaces
+;; Perspectives + Projectile
 
 (use-package perspective
   :init (persp-mode)
   :custom
   (persp-suppress-no-prefix-key-warning t))
 
-
-;; Projectile
-
 (use-package projectile
   :diminish projectile-mode
   :config (projectile-mode)
   :init
-  (setq projectile-switch-project-action #'projectile-dired))
+  ;; When switching to a new project, magit-status if the project is a git repo, otherwise dired
+  (setq projectile-switch-project-action #'magit-status))
+
+(use-package persp-projectile
+    :straight (persp-projectile
+               :host github
+               :repo "bbatsov/persp-projectile")
+    :commands (projectile-persp-switch-project))
 
 ;; LSP & Auto-completion
 
