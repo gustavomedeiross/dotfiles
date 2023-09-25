@@ -247,7 +247,8 @@
                                     (bookmarks . "bookmark")
                                     (agenda    . "calendar")
                                     (projects  . "rocket")
-                                    (registers . "database"))))
+                                    (registers . "database")))
+  (setq dashboard-projects-switch-function #'projectile-persp-switch-project))
 
 (use-package all-the-icons
   :if (display-graphic-p))
