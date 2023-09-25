@@ -228,8 +228,34 @@
 
 ;; UI
 
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-center-content t)
+  (setq dashboard-icon-type 'all-the-icons)
+  (setq dashboard-display-icons-p t)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-page-separator "\n\n")
+  (setq dashboard-items '((recents  . 5)
+                          (bookmarks . 5)
+                          (projects . 5)
+                          (agenda . 5)
+                          (registers . 5)))
+  (setq dashboard-heading-icons '((recents   . "history")
+                                    (bookmarks . "bookmark")
+                                    (agenda    . "calendar")
+                                    (projects  . "rocket")
+                                    (registers . "database"))))
+
 (use-package all-the-icons
   :if (display-graphic-p))
+
+(use-package all-the-icons-dired
+  :init
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+  :custom
+  (all-the-icons-dired-monochrome nil))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
