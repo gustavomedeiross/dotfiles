@@ -186,6 +186,9 @@
     "g s" '(magit-status :which-key "Magit status")
     "g g" '(magit-status :which-key "Magit status")
 
+    ;; Forge
+    "f o p" '(forge-browse-pullreqs :which-key "Forge open pull requests")
+
     ;; Org Mode
     "o t" '(org-todo :which-key "Org TODO")
 
@@ -319,7 +322,9 @@
 
 (use-package eshell
   :hook
-  (eshell-mode . (lambda () (display-line-numbers-mode 0)))
+  (eshell-mode . (lambda ()
+                   (display-line-numbers-mode 0)
+                   (setenv "TERM" "xterm-256color")))
   ;; Truncate buffer for performance
   (eshell-output-filter-functions . eshell-truncate-buffer)
   ;; Save command history when commands are entered
@@ -365,6 +370,11 @@
   (general-define-key
    :keymaps 'transient-base-map
    "<escape>" 'transient-quit-one))
+
+(use-package forge
+  :after magit
+  :config
+  (setq auth-sources '("~/.authinfo")))
 
 ;; Perspectives + Projectile
 
