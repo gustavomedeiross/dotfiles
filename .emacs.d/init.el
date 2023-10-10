@@ -192,13 +192,11 @@
     ;; Org Mode
     "o t" '(org-todo :which-key "Org TODO")
 
-    ;; Terminal
-    ;; "t n" '(multi-vterm :which-key "Open new vterm window")
-
     ;; Project
     "p f" '(consult-find :which-key "Run a fuzzy find against project files")
     "p s" '(consult-ripgrep :which-key "Run ripgrep against project files")
     "p p" '(projectile-persp-switch-project :which-key "Switch to project in a new perspective")
+    "p e" '(project-eshell :which-key "Open a new eshell instance in the project directory")
 
     ;; Workspaces
     "TAB ," '(persp-switch :which-key "Switch to a workspace")
