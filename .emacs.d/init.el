@@ -86,6 +86,8 @@
 
 (use-package string-inflection)
 
+(use-package multiple-cursors)
+
 (use-package git-link)
 
 ;; TODO: Move these gm/* functions to use-package clause
