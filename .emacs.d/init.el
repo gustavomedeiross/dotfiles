@@ -482,10 +482,12 @@
   :config
   (setq typescript-indent-level 2))
 
-;; Kotlin
-(use-package kotlin-mode
-  :mode "\\.kt\\'"
-  :hook (kotlin-mode . lsp-deferred))
+;; Lilypond
+(use-package lilypond-mode
+  ;; :straight (:host github :repo "lilypond/lilypond" :files ("elisp" "*.el"))
+  :straight nil
+  :load-path "~/.emacs.d/site-lisp"
+  :mode ("\\.ly\\'" . LilyPond-mode))
 
 ;; Copilot
 (use-package copilot
