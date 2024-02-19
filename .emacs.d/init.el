@@ -90,11 +90,6 @@
 
 (use-package git-link)
 
-;; TODO: Move these gm/* functions to use-package clause
-(defun gm/org-mode-setup ()
-  (org-indent-mode)
-  (visual-line-mode 1))
-
 (defun gm/org-font-setup ()
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
@@ -111,13 +106,34 @@
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
 (use-package org
-  :hook (org-mode . gm/org-mode-setup)
+  :hook (org-mode . (lambda ()
+                      (org-indent-mode)
+                      (visual-line-mode 1)))
   :config
   (setq org-ellipsis " ▾")
   (gm/org-font-setup)
+
+  (setq org-agenda-files '("~/org"))
+  ;; TODO keywords.
   (setq org-todo-keywords
-      '((sequence "TODO(t)" "DOING(d)" "|" "DONE(D)")
-        (sequence "TODO(t)" "CODING(c)" "REVIEW(r)" "|" "DONE(D)"))))
+        '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "INTR(i)" "DONE(d)")))
+  ;; Show the daily agenda by default.
+  (setq org-agenda-span 'day)
+  ;; Hide tasks that are scheduled in the future.
+  (setq org-agenda-todo-ignore-scheduled 'future)
+  ;; Use "second" instead of "day" for time comparison.
+  ;; It hides tasks with a scheduled time like "<2020-11-15 Sun 11:30>"
+  (setq org-agenda-todo-ignore-time-comparison-use-seconds t)
+  ;; Hide the deadline prewarning prior to scheduled date.
+  (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
+  ;; Customized view for the daily workflow. (Command: "C-c a n")
+  (setq org-agenda-custom-commands
+        '(("n" "Agenda / INTR / PROG / NEXT"
+           ((agenda "" nil)
+            (todo "INTR" nil)
+            (todo "PROG" nil)
+            (todo "NEXT" nil))
+           nil))))
 
 (use-package org-bullets
   :after org
@@ -193,6 +209,7 @@
 
     ;; Org Mode
     "o t" '(org-todo :which-key "Org TODO")
+    "o a" '(org-agenda :which-key "Org agenda")
 
     ;; Project
     "p f" '(consult-find :which-key "Run a fuzzy find against project files")
@@ -359,6 +376,10 @@
                  ("terminfo/65" "terminfo/65/*")
                  ("integration" "integration/*")
                  (:exclude ".dir-locals.el" "*-tests.el"))))
+
+(use-package vterm
+  :config
+  (setq vterm-max-scrollback 10000))
 
 ;; Magit
 
