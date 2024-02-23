@@ -113,10 +113,24 @@
   (setq org-ellipsis " ▾")
   (gm/org-font-setup)
 
-  (setq org-agenda-files '("~/org"))
   ;; TODO keywords.
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "INTR(i)" "DONE(d)")))
+  (setq org-capture-templates
+        '(("t" "Todo" entry (file+headline "~/org/tasks.org" "Tasks")
+           "* TODO %?\n  %i\n  %a")
+          ("j" "Journal" entry (file+datetree "~/org/journal.org")
+           "* %?\nEntered on %U\n  %i\n  %a"))))
+
+(use-package org-agenda
+  :ensure nil
+  :straight nil
+  :bind
+  (:map org-agenda-mode-map
+        ("j" . evil-next-line)
+        ("k" . evil-previous-line))
+  :config
+  (setq org-agenda-files '("~/org/tasks.org"))
   ;; Show the daily agenda by default.
   (setq org-agenda-span 'day)
   ;; Hide tasks that are scheduled in the future.
@@ -210,6 +224,9 @@
     ;; Org Mode
     "o t" '(org-todo :which-key "Org TODO")
     "o a" '(org-agenda :which-key "Org agenda")
+    "o a" '(org-agenda :which-key "Org agenda")
+    "o q" '(org-set-tags :which-key "Org set tags")
+    "o s" '(org-schedule :which-key "Org set tags")
 
     ;; Project
     "p f" '(consult-find :which-key "Run a fuzzy find against project files")
