@@ -224,9 +224,9 @@
     ;; Org Mode
     "o t" '(org-todo :which-key "Org TODO")
     "o a" '(org-agenda :which-key "Org agenda")
-    "o a" '(org-agenda :which-key "Org agenda")
-    "o q" '(org-set-tags :which-key "Org set tags")
-    "o s" '(org-schedule :which-key "Org set tags")
+    "o c" '(org-capture :which-key "Org capture")
+    "o q" '(org-set-tags-command :which-key "Org set tags")
+    "o s" '(org-schedule :which-key "Org schedule")
 
     ;; Project
     "p f" '(consult-find :which-key "Run a fuzzy find against project files")
